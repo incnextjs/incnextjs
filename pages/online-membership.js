@@ -16,26 +16,29 @@ const ViewerQuery = gql`
 
 const OnlineMembership = () => {
 
-    const {
-        data
-    } = useQuery(ViewerQuery);
+    // const {
+    //     data
+    // } = useQuery(ViewerQuery);
 
-    useEffect(() => {
-        if (data) {
-            console.log(data.page)
-        }
-    }, [data])
+    // useEffect(() => {
+    //     if (data) {
+    //         console.log(data.page)
+    //     }
+    // }, [data])
 
-    if (data) {
-        const { page } = data;
-        return (
-            <div>
-                <h2>{page.title}</h2>
-                <p>{page.content}</p>
-            </div>
-        )
-    }
-    return null;
+    // if (data) {
+    //     const { page } = data;
+    //     return (
+    //         <div>
+    //             <h2>{page.title}</h2>
+    //             <p>{page.content}</p>
+    //         </div>
+    //     )
+    // }
+    return <div>
+        <h2>Online membership</h2>
+    </div>
+    // return null;
 }
 
 export default withApollo(OnlineMembership);
