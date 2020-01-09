@@ -1,6 +1,6 @@
 import App from 'next/app'
 import Head from 'next/head'
-import Layout from '../template/components/Layout';
+import Layout from '../components/Layout';
 
 import '../template/Apps.scss';
 import '../template/css/materialdesignicons.min.css';
@@ -23,6 +23,9 @@ export default class MyApp extends App {
 
         return <React.Fragment>
             <Layout>
+                <Head>
+                    <script src="https://kit.fontawesome.com/785da47453.js" crossorigin="anonymous"></script>
+                </Head>
                 <Component {...pageProps} />
             </Layout>
         </React.Fragment>

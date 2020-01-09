@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { Row, Col } from 'reactstrap';
 
 
-class Page extends Component {
+class PageSidebarTemplate extends Component {
 
     constructor(props) {
         super(props);
@@ -34,7 +34,7 @@ class Page extends Component {
     }
 
     render() {
-        const { title, featured_image, content } = this.props;
+        const { title, featuredImage, content } = this.props;
         return (
             <React.Fragment>
                 <Head>
@@ -75,7 +75,7 @@ class Page extends Component {
                                 <div className="mr-lg-3">
                                     <div className="blog position-relative overflow-hidden shadow rounded">
                                         <div className="position-relative">
-                                            <img src={featured_image.src} srcSet={featured_image.srcSet}
+                                            <img src={featuredImage.src || ''} srcSet={featuredImage.srcSet || ''}
                                                 className="img-fluid rounded-top" alt="" />
                                         </div>
                                         <div className="content p-4">
@@ -165,4 +165,4 @@ class Page extends Component {
         );
     }
 }
-export default Page;
+export default PageSidebarTemplate;

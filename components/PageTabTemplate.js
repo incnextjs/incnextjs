@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { Row, Col } from 'reactstrap';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-class PageWithTabs extends Component {
+class PageTabTemplate extends Component {
 
     constructor(props) {
         super(props);
@@ -22,7 +22,9 @@ class PageWithTabs extends Component {
 
         // select first tab
         const { tabs } = this.props;
-        this.selectTab(tabs[0].tab.id);
+        if (tabs.length > 0) {
+            this.selectTab(tabs[0].id);
+        }
     }
 
     // Make sure to remove the DOM listener when the component is unmounted.
@@ -44,7 +46,7 @@ class PageWithTabs extends Component {
 
     getTab = (id) => {
         const { tabs } = this.props;
-        const { tab: selectedTab } = tabs.find(({ tab }) => tab.id == id);
+        const selectedTab = tabs.find(tab => tab.id == id);
         return selectedTab;
     }
 
@@ -53,7 +55,7 @@ class PageWithTabs extends Component {
         this.setState({
             currentTab: {
                 key: selectedTab.id,
-                currentChild: selectedTab.tabs.length > 0 ? selectedTab.tabs[0].id : null
+                currentChild: selectedTab.children.length > 0 ? selectedTab.children[0].id : null
             }
         });
     }
@@ -68,7 +70,7 @@ class PageWithTabs extends Component {
     }
 
     render() {
-        const { title, featured_image, content, tabs } = this.props;
+        const { title, featuredImage, content, tabs } = this.props;
         const { currentTab } = this.state;
         return (
             <React.Fragment>
@@ -86,7 +88,7 @@ class PageWithTabs extends Component {
                                             <h2> {title} </h2>
                                             <div className="page-main-tabs">
 
-                                                {/* {tabs.map(({ tab }) => (
+                                                {/* {tabs.map(tab => (
                                                     <a className="rounded" id={tab.id} onClick={e => { this.selectTab(e.target.id) }}>{tab.title}</a>
                                                 ))} */}
                                             </div>
@@ -107,7 +109,7 @@ class PageWithTabs extends Component {
                     <div className="container">
 
                         <div className="page-main-tabs">
-                            {tabs.map(({ tab }) => (
+                            {tabs.map(tab => (
                                 <a className={`rounded ${tab.id == currentTab.key ? 'active' : ''}`} onClick={e => { this.selectTab(tab.id) }}>{tab.title}</a>
                             ))}
                         </div>
@@ -117,15 +119,15 @@ class PageWithTabs extends Component {
                                 <div className="mr-lg-3">
                                     <div className="blog position-relative overflow-hidden shadow rounded">
                                         <div className="position-relative">
-                                            {featured_image && (
-                                                <img src={featured_image.src} srcSet={featured_image.srcSet}
+                                            {featuredImage && (
+                                                <img src={featuredImage.src || null} srcSet={featuredImage.srcSet || null}
                                                     className="img-fluid rounded-top" alt="" />
                                             )}
                                         </div>
                                         <div className="content p-4">
-                                            {tabs.map(({ tab }) => (
+                                            {tabs.map(tab => (
                                                 <div style={!currentTab || currentTab.key != tab.id ? { display: 'none' } : {}} >
-                                                    {tab.tabs.map(childTab => (
+                                                    {tab.children.map(childTab => (
                                                         <div style={!currentTab || currentTab.currentChild != childTab.id ? { display: 'none' } : {}}
                                                             dangerouslySetInnerHTML={{ __html: childTab.content }} />
                                                     ))}
@@ -139,11 +141,11 @@ class PageWithTabs extends Component {
                             <Col lg={4} md={5} className="col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                                 <div className="sidebar mt-sm-30 p-4 rounded shadow"
                                     style={{ top: '15%', position: 'sticky' }}>
-                                    {tabs.map(({ tab }) => (
+                                    {tabs.map(tab => (
                                         <div className="widget mb-4 pb-2" style={!currentTab || currentTab.key != tab.id ? { display: 'none' } : {}}>
                                             <h4 className="widget-title">{tab.title}</h4>
                                             <ul className="list-unstyled mt-4 mb-0 catagories">
-                                                {tab.tabs.map(childTab => (
+                                                {tab.children.map(childTab => (
                                                     <li className={`${currentTab.currentChild == childTab.id ? 'active' : ''}`}
                                                         onClick={e => { this.selectChildTab(childTab.id) }}>
                                                         <a>{childTab.title}</a>
@@ -173,4 +175,4 @@ class PageWithTabs extends Component {
         );
     }
 }
-export default PageWithTabs;
+export default PageTabTemplate;

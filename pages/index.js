@@ -16,28 +16,29 @@ const ViewerQuery = gql`
 
 const Home = () => {
 
-  const {
-    data
-  } = useQuery(ViewerQuery);
+  // const {
+  //   data
+  // } = useQuery(ViewerQuery);
 
-  useEffect(() => {
-    if (data) {
-      console.log(data.allPages)
-    }
-  }, [data])
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log(data.allPages)
+  //   }
+  // }, [data])
 
-  if (data) {
-    return (
-      <div>
-        {data.allPages.map(page => (
-          <div>
-            <h2>{page.title}</h2>
-          </div>
-        ))}
-      </div>
-    )
-  }
-  return null;
+  // if (data) {
+  //   return (
+  //     <div>
+  //       {data.allPages.map(page => (
+  //         <div>
+  //           <h2>{page.title}</h2>
+  //         </div>
+  //       ))}
+  //     </div>
+  //   )
+  // }
+  // return null;
+  return <p>pp</p>;
 }
 
 export default withApollo(Home);
