@@ -108,14 +108,51 @@ class PageTabTemplate extends Component {
                 <section className="section">
                     <div className="container">
 
-                        <div className="page-main-tabs">
+                        {/* <div className="page-main-tabs">
                             {tabs.map(tab => (
                                 <a className={`rounded ${tab.id == currentTab.key ? 'active' : ''}`} onClick={e => { this.selectTab(tab.id) }}>{tab.title}</a>
                             ))}
-                        </div>
+                        </div> */}
 
                         <Row>
-                            <Col lg={8} md={7}>
+                            <Col lg={4} md={5} className="col-12 mt-4 mt-sm-0 pt-2 pt-sm-0 page-nested-tabs">
+                                <div className="sidebar mt-sm-30 p-4 rounded shadow"
+                                    style={{ top: '15%', position: 'sticky' }}>
+
+                                    <ul className="list-unstyled page-tab-items">
+                                        {tabs.map(tab => (
+                                            <li className={`widget mb-4 page-tab-item ${tab.id == currentTab.key ? 'active' : ''}`}>
+                                                <i className="fas fa-angle-right page-tab-item-icon"></i>
+                                                <a onClick={e => { this.selectTab(tab.id) }}>{tab.title}</a>
+                                                <ul className={`list-unstyled page-tab-nested-items ${tab.id == currentTab.key ? "active" : ""}`}>
+                                                    {tab.children.map(childTab => (
+                                                        <li className={`nested-tab-item ${currentTab.currentChild == childTab.id ? 'active' : ''}`}
+                                                            onClick={e => { this.selectChildTab(childTab.id) }}>
+                                                            <i className="fas fa-angle-double-right page-tab-item-icon"></i>
+                                                            <a>{childTab.title}</a>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </li>
+                                        ))}
+                                        {/* {tabs.map(tab => (
+                                            <div className="widget mb-4 pb-2" style={!currentTab || currentTab.key != tab.id ? { display: 'none' } : {}}>
+                                                <h4 className="widget-title nested-tab-title">{tab.title}</h4>
+                                                <ul className="list-unstyled mt-4 mb-0 catagories nested-tab-items">
+                                                {tab.children.map(childTab => (
+                                                    <li className={`${currentTab.currentChild == childTab.id ? 'active' : ''}`}
+                                                        onClick={e => { this.selectChildTab(childTab.id) }}>
+                                                        <a>{childTab.title}</a>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            </div>
+                                        ))} */}
+                                    </ul>
+                                </div>
+                            </Col>
+
+                            <Col lg={8} md={6}>
                                 <div className="mr-lg-3">
                                     <div className="blog position-relative overflow-hidden shadow rounded">
                                         <div className="position-relative">
@@ -137,37 +174,6 @@ class PageTabTemplate extends Component {
                                     </div>
                                 </div>
                             </Col>
-
-                            <Col lg={4} md={5} className="col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                <div className="sidebar mt-sm-30 p-4 rounded shadow"
-                                    style={{ top: '15%', position: 'sticky' }}>
-                                    {tabs.map(tab => (
-                                        <div className="widget mb-4 pb-2" style={!currentTab || currentTab.key != tab.id ? { display: 'none' } : {}}>
-                                            <h4 className="widget-title">{tab.title}</h4>
-                                            <ul className="list-unstyled mt-4 mb-0 catagories">
-                                                {tab.children.map(childTab => (
-                                                    <li className={`${currentTab.currentChild == childTab.id ? 'active' : ''}`}
-                                                        onClick={e => { this.selectChildTab(childTab.id) }}>
-                                                        <a>{childTab.title}</a>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    ))}
-                                    <div className="widget mb-4 pb-2">
-                                        <h4 className="widget-title">Search</h4>
-                                        <div id="search2" className="widget-search mt-4 mb-0">
-                                            <form role="search" method="get" id="searchform" className="searchform">
-                                                <div>
-                                                    <input type="text" className="border rounded" name="s" id="s" placeholder="Search Keywords..." />
-                                                    <input type="submit" id="searchsubmit" value="Search" />
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Col>
-
                         </Row>
                     </div>
                 </section>

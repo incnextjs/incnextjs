@@ -22,7 +22,13 @@ const GET_PAGE = gql`
         }
       }
       content {
+        ... on HeadingRecord {
+          text
+        }
         ... on TextRecord {
+          text
+        }
+        ... on QuoteRecord {
           text
         }
         ... on TabContentRecord {
@@ -40,6 +46,7 @@ const GET_PAGE = gql`
           }
         }
       }
+      updatedAt
     }
   }
   `;
@@ -58,10 +65,14 @@ function Page() {
   // }, [data])
 
   if (data) {
-    const { page: { pageTemplate, title, featuredImage, content } } = data;
+    const { page: { pageTemplate, title, featuredImage, content, updatedAt } } = data;
     switch (pageTemplate.name) {
       case 'Sidebar':
-        return <PageSidebarTemplate title={title} featuredImage={featuredImage.responsiveImage} />
+        return <PageSidebarTemplate
+          title={title}
+          featuredImage={featuredImage.responsiveImage}
+          content={content}
+          updatedAt={updatedAt} />
       case 'Tab Page':
         const tab = content.find(item => item.__typename == 'TabContentRecord');
         const tabs = tab && tab.tab.tabs.map(({ tab }) => { return tab }) || [];
