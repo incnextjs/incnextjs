@@ -155,7 +155,7 @@ function OnlineMembership() {
                                                     <Col md={6}>
                                                         <div className="form-group position-relative">
                                                             <label>Title <span className="text-danger">*</span></label>
-                                                            <i className="fas fa-headingt ml-3 icons"></i>
+                                                            <i className="fas fa-genderless ml-3 icons"></i>
                                                             <select name="title" value={formData.title} className="form-control pl-5" required
                                                                 onChange={handleOnChange}>
                                                                 <option value="mr">Mr.</option>
@@ -168,7 +168,7 @@ function OnlineMembership() {
                                                     <Col md={6}>
                                                         <div className="form-group position-relative">
                                                             <label>First name <span className="text-danger">*</span></label>
-                                                            <i className="mdi mdi-account ml-3 icons"></i>
+                                                            <i className="fas fa-user ml-3 icons"></i>
                                                             <input type="text" className="form-control pl-5" placeholder="First Name" required
                                                                 name="first_name" value={formData.first_name} onChange={handleOnChange} />
                                                         </div>
@@ -176,7 +176,7 @@ function OnlineMembership() {
                                                     <Col md={6}>
                                                         <div className="form-group position-relative">
                                                             <label>Middle name</label>
-                                                            <i className="mdi mdi-account ml-3 icons"></i>
+                                                            <i className="fas fa-user ml-3 icons"></i>
                                                             <input type="text" className="form-control pl-5" placeholder="Middle Name"
                                                                 name="middle_name" value={formData.middle_name} onChange={handleOnChange} />
                                                         </div>
@@ -184,7 +184,7 @@ function OnlineMembership() {
                                                     <Col md={6}>
                                                         <div className="form-group position-relative">
                                                             <label>Last name <span className="text-danger">*</span></label>
-                                                            <i className="mdi mdi-account ml-3 icons"></i>
+                                                            <i className="fas fa-user ml-3 icons"></i>
                                                             <input type="text" className="form-control pl-5" placeholder="Last Name"
                                                                 name="last_name" value={formData.last_name} onChange={handleOnChange} />
                                                         </div>
@@ -192,7 +192,7 @@ function OnlineMembership() {
                                                     <Col md={6}>
                                                         <div className="form-group position-relative">
                                                             <label>Email ID <span className="text-danger">*</span></label>
-                                                            <i className="mdi mdi-email ml-3 icons"></i>
+                                                            <i className="fas fa-at ml-3 icons"></i>
                                                             <input type="email" className="form-control pl-5" placeholder="Email" required
                                                                 name="email" value={formData.email} onChange={handleOnChange} />
                                                         </div>
@@ -200,7 +200,7 @@ function OnlineMembership() {
                                                     <Col md={6}>
                                                         <div className="form-group position-relative">
                                                             <label>Mobile Number <span className="text-danger">*</span></label>
-                                                            <i className="mdi mdi-account ml-3 icons"></i>
+                                                            <i className="fas fa-phone-square-alt ml-3 icons"></i>
                                                             <input type="text" className="form-control pl-5" placeholder="Mobile Number" required
                                                                 name="mobile_number" value={formData.mobile_number} onChange={handleOnChange} />
                                                         </div>
@@ -208,7 +208,7 @@ function OnlineMembership() {
                                                     <Col md={6}>
                                                         <div className="form-group position-relative">
                                                             <label>OTP <span className="text-danger">*</span></label>
-                                                            <i className="mdi mdi-account ml-3 icons"></i>
+                                                            <i className="fas fa-file-alt ml-3 icons"></i>
                                                             <input type="text" className="form-control pl-5" placeholder="OTP" required
                                                                 name="otp" value={formData.otp} onChange={handleOnChange} />
                                                         </div>
@@ -216,7 +216,7 @@ function OnlineMembership() {
                                                     <Col md={6}>
                                                         <div className="form-group position-relative">
                                                             <label>State <span className="text-danger">*</span></label>
-                                                            <i className="mdi mdi-account ml-3 icons"></i>
+                                                            <i className="fas fa-flag ml-3 icons"></i>
                                                             <select className="form-control pl-5" required
                                                                 name="state" value={formData.state} onChange={handleOnChange}>
                                                                 <option></option>
@@ -229,7 +229,7 @@ function OnlineMembership() {
                                                     <Col md={6}>
                                                         <div className="form-group position-relative">
                                                             <label>Voter ID <span className="text-danger">*</span></label>
-                                                            <i className="mdi mdi-account ml-3 icons"></i>
+                                                            <i className="fas fa-vote-yea ml-3 icons"></i>
                                                             <input type="text" className="form-control pl-5" placeholder="Voter ID" required
                                                                 name="voter_id" value={formData.voter_id} onChange={handleOnChange} />
                                                         </div>

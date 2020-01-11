@@ -120,7 +120,7 @@ module.exports = withFonts(withCSS(withSass({
 
         return {
             ...dynamicPathMap,
-            // '/': { page: '/index' },
+            '/': { page: '/index', query: {slug:'index'} },
             // '/index': { page: '/index' },
         }
     }
