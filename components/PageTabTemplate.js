@@ -86,18 +86,6 @@ class PageTabTemplate extends Component {
                                     <Col lg={12} className="text-center">
                                         <div className="page-next-level">
                                             <h2> {title} </h2>
-                                            <div className="page-main-tabs">
-
-                                                {/* {tabs.map(tab => (
-                                                    <a className="rounded" id={tab.id} onClick={e => { this.selectTab(e.target.id) }}>{tab.title}</a>
-                                                ))} */}
-                                            </div>
-                                            <ul className="page-next d-inline-block bg-white shadow p-2 pl-4 pr-4 rounded mb-0">
-                                                <li><Link href="/"><a className="text-uppercase font-weight-bold text-dark">Home</a></Link></li>
-                                                <li>
-                                                    <span className="text-uppercase text-primary font-weight-bold">{title}</span>
-                                                </li>
-                                            </ul>
                                         </div>
                                     </Col>
                                 </Row>

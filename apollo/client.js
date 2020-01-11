@@ -139,7 +139,8 @@ export function createApolloClient(initialState = {}) {
             credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
             fetch,
             headers: {
-                'Authorization': '14d0fe61df420e9f34ce6714ed9c02'
+                // 'Authorization': '14d0fe61df420e9f34ce6714ed9c02' read
+                'Authorization': 'c2afe34500c5de959544bb906fa129' // full access
             }
         }),
         cache: new InMemoryCache({fragmentMatcher}).restore(initialState),

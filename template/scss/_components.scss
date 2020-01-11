@@ -162,11 +162,11 @@ $value in $colors {
             display: inline-block;
             margin-right: 5px;
             &:after {
-                content: "\f142";
+                content: "\f054";
                 font-size: 16px;
                 color: $dark; 
-                font-family: 'Material Design Icons';
-            }     
+                font-family: 'Font Awesome 5 Pro';
+            }
             &:last-child {
                 margin-right: 0;
                 &:after {

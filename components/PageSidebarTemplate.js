@@ -49,18 +49,6 @@ class PageSidebarTemplate extends Component {
                                     <Col lg={12} className="text-center">
                                         <div className="page-next-level">
                                             <h2> {title} </h2>
-                                            <ul className="list-unstyled mt-4">
-                                                {/* <li className="list-inline-item h6 user text-muted mr-2"><i className="mdi mdi-account"></i> Calvin Carlo</li> */}
-                                                <li className="list-inline-item h6 date text-muted"><i className="mdi mdi-calendar-check"></i> {moment(updatedAt).format('Do MMMM, YYYY')}</li>
-                                            </ul>
-                                            <ul className="page-next d-inline-block bg-white shadow p-2 pl-4 pr-4 rounded mb-0">
-                                                <li><Link href="/"><a className="text-uppercase font-weight-bold text-dark">Home</a></Link></li>
-                                                {/* <li><Link href="#" className="text-uppercase font-weight-bold text-dark">Pages</Link></li>
-                                                <li><Link href="#" className="text-uppercase font-weight-bold text-dark">Blog</Link></li> */}
-                                                <li>
-                                                    <span className="text-uppercase text-primary font-weight-bold">{title}</span>
-                                                </li>
-                                            </ul>
                                         </div>
                                     </Col>
                                 </Row>
