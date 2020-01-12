@@ -55,7 +55,7 @@ function Footer() {
                                 {data && data.menuLocation.menuItems.map(({ menu }) => (
                                     <Col md={4} style={{marginBottom:20}}>
                                         <h4 className="text-light footer-head">{menu.name}</h4>
-                                        <ul className="list-unstyled footer-list mt-4">
+                                        <ul className="list-unstyled footer-list" style={{fontSize:14}}>
                                             {menu.children.map(childrenMenu => (
                                                 <li><Link href={childrenMenu.pathname}><a className="text-foot"><i className="fas fa-angle-right mr-1"></i> {childrenMenu.name}</a></Link></li>
                                             ))}
