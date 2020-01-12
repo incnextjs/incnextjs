@@ -32,6 +32,11 @@ function Layout({ children }) {
     data
   } = useQuery(GET_PAGE_SETTINGS);
 
+  useEffect(() => {
+    document.getElementById("pageLoader").style.display = "block";
+    setTimeout(function () { document.getElementById("pageLoader").style.display = "none"; }, 1000);
+  }, []);
+
   // useEffect(() => {
   //   if (data) {
   //     console.log(data)
@@ -40,8 +45,8 @@ function Layout({ children }) {
 
 
   // componentDidMount() {
-  //   document.getElementById("pageLoader").style.display = "block";
-  //   setTimeout(function () { document.getElementById("pageLoader").style.display = "none"; }, 1000);
+  // document.getElementById("pageLoader").style.display = "block";
+  // setTimeout(function () { document.getElementById("pageLoader").style.display = "none"; }, 1000);
   // }
 
   if (data) {
