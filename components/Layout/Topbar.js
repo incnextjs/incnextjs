@@ -91,48 +91,33 @@ function Topbar({ logo }) {
             <header id="topnav" className="defaultscroll sticky">
                 <div className="container">
                     <Row>
-                        {/* <Row>
-                            <Col md={3} style={{
-                                display: 'flex',
-                                alignItems: 'center'
-                            }}>
-                                {logo && (
-                                    <div>
-                                        <img src={logo.src} srcSet={logo.srcSet}
-                                            style={{ height: '100%', width: '100%' }} />
-                                    </div>
-                                ) || (
-                                        <Link href="/index"><a className="logo">Landrick<span className="text-primary">.</span></a></Link>
-                                    )}
-                            </Col>
-                        </Row> */}
-
-                        <div className="menu-extras">
-                            <div className="menu-item">
-                                <a href="#" onClick={toggleLine} className={state.isOpen ? "navbar-toggle open" : "navbar-toggle"} >
-                                    <div className="lines">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                </a>
+                        <Col lg={4} md={4} sm={6} xs={8} style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            marginTop: 10,
+                        }}>
+                            {logo && (
+                                <div>
+                                    <img src={logo.src} srcSet={logo.srcSet}
+                                        style={{ height: '100%', width: '100%' }} />
+                                </div>
+                            ) || (
+                                    <Link href="/index"><a className="logo">Landrick<span className="text-primary">.</span></a></Link>
+                                )}
+                        </Col>
+                        <Col lg={8} md={8} sm={6} xs={4}>
+                            <div className="menu-extras">
+                                <div className="menu-item">
+                                    <a href="#" onClick={toggleLine} className={state.isOpen ? "navbar-toggle open" : "navbar-toggle"} >
+                                        <div className="lines">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <Col md={12}>
-                            <Col md={4} style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                marginTop: 10,
-                            }}>
-                                {logo && (
-                                    <div>
-                                        <img src={logo.src} srcSet={logo.srcSet}
-                                            style={{ height: '100%', width: '100%' }} />
-                                    </div>
-                                ) || (
-                                        <Link href="/index"><a className="logo">Landrick<span className="text-primary">.</span></a></Link>
-                                    )}
-                            </Col>
+                        </Col>
                             <div id="navigation" style={{ display: state.isOpen ? "block" : "none" }}>
                                 <ul className="navigation-menu" id="top-menu">
                                     {data && data.menuLocation.menuItems.map(({ menu }) => {
@@ -170,7 +155,6 @@ function Topbar({ logo }) {
                                     })}
                                 </ul>
                             </div>
-                        </Col>
                     </Row>
                 </div>
             </header>
