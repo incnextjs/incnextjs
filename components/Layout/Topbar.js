@@ -11,25 +11,13 @@ const GET_MENUS = gql`
         menuItems {
           menu {
             name
-            path
-            navigation {
-              slug
-            }
-            destinationType
+            pathname
             children {
               name
-              path
-              navigation {
-                slug
-              }
-              destinationType
+              pathname
               children {
                 name
-                path
-                navigation {
-                  slug
-                }
-                destinationType
+                pathname
               }
             }
           }
@@ -42,8 +30,8 @@ function Topbar({ logo }) {
 
     const [state, setState] = useState({
         isOpen: false,
-        keyIssues: false,
-        organisation: false,
+        // keyIssues: false,
+        // organisation: false,
     });
 
     const {
@@ -60,9 +48,13 @@ function Topbar({ logo }) {
         var matchingMenuItem = null;
         var ul = document.getElementById("top-menu");
         var items = ul.getElementsByTagName("a");
+        // console.log(items)
         for (var i = 0; i < items.length; ++i) {
+            // console.log(window.location.pathname  + '----> ', items[i].pathname)
             if (window.location.pathname === items[i].pathname) {
                 matchingMenuItem = items[i];
+                // console.log('original: ', items[i].pathname)
+                // console.log(window.location.pathname  + '----> ', items[i].pathname)
                 break;
             }
         }
@@ -72,11 +64,12 @@ function Topbar({ logo }) {
     });
 
     const toggleLine = () => {
-        setState({ state, isOpen: !prevState.isOpen });
+        setState({ ...state, isOpen: !state.isOpen });
     }
 
     const activateParentDropdown = (item) => {
         const parent = item.parentElement;
+        console.log(item)
         if (parent) {
             parent.classList.add('active'); // li
             const parent1 = parent.parentElement;
@@ -84,20 +77,20 @@ function Topbar({ logo }) {
             if (parent1) {
                 const parent2 = parent1.parentElement;
                 parent2.classList.add('active'); // li
-                if (parent2) {
-                    const parent3 = parent2.parentElement;
-                    parent3.classList.add('active'); // li
-                    if (parent3) {
-                        const parent4 = parent3.parentElement;
-                        parent4.classList.add('active'); // li
-                    }
-                }
+                // if (parent2) {
+                //     const parent3 = parent2.parentElement;
+                //     parent3.classList.add('active'); // li
+                //     if (parent3) {
+                //         const parent4 = parent3.parentElement;
+                //         parent4.classList.add('active'); // li
+                //     }
+                // }
             }
         }
     }
 
     const getPath = (menu) => {
-        return `${(menu.path && `/${menu.path}`) || (menu.navigation && `/${menu.navigation.slug}`) || ``}`
+        // return `${(menu.path != '' && `/${menu.path}`) || (menu.navigation && `/${menu.navigation.slug}`) || ``}`
     }
 
     const getSlug = (menu) => {
@@ -110,8 +103,8 @@ function Topbar({ logo }) {
                 <div className="container">
                     <Row>
                         <Col md={3} style={{
-                            display:'flex',
-                            alignItems:'center'
+                            display: 'flex',
+                            alignItems: 'center'
                         }}>
                             {logo && (
                                 <div>
@@ -125,18 +118,57 @@ function Topbar({ logo }) {
                         {/* <div className="buy-button">
                         <Link href="#"><a className="btn btn-primary">Online Membership</a></Link>
                     </div> */}
-                        {/* <div className="menu-extras">
-                        <div className="menu-item">
-                            <Link href="#" onClick={toggleLine} className={state.isOpen ? "navbar-toggle open" : "navbar-toggle"} >
-                                <div className="lines">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </Link>
+                        <div className="menu-extras">
+                            <div className="menu-item">
+                                <a href="#" onClick={toggleLine} className={state.isOpen ? "navbar-toggle open" : "navbar-toggle"} >
+                                    <div className="lines">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div> */}
                         <Col md={9}>
+                            <div id="navigation" style={{ display: state.isOpen ? "block" : "none" }}>
+                                <ul className="navigation-menu" id="top-menu">
+                                    {data && data.menuLocation.menuItems.map(({ menu }) => {
+
+                                        if (menu.children.length > 0) {
+                                            return <li className="has-submenu">
+                                                <Link href={menu.pathname || ''}>
+                                                    <a onClick={(event) => { event.preventDefault(); }}>{menu.name}</a>
+                                                </Link><span className="menu-arrow"></span>
+
+                                                <ul className={"submenu"}>
+                                                    {menu.children.map(childrenMenu => {
+
+                                                        if (childrenMenu.children.length > 0) {
+                                                            return (
+                                                                <li className="has-submenu">
+                                                                    <Link href={childrenMenu.pathname || ''}><a onClick={(event) => { event.preventDefault(); }}>{childrenMenu.name}</a></Link><span className="submenu-arrow"></span>
+                                                                    <ul className={"submenu"}>
+                                                                        {childrenMenu.children.map(subChildrenMenu => {
+                                                                            return <li><Link href={subChildrenMenu.pathname || ''}><a>{subChildrenMenu.name}</a></Link></li>
+                                                                        })}
+                                                                    </ul>
+                                                                </li>
+                                                            )
+                                                        } else {
+                                                            return <li><Link href={childrenMenu.pathname || ''}><a>{childrenMenu.name}</a></Link></li>
+                                                        }
+
+                                                    })}
+                                                </ul>
+
+                                            </li>
+                                        }
+                                        return <li><Link href={menu.pathname || ''}><a>{menu.name}</a></Link></li>
+                                    })}
+                                </ul>
+                            </div>
+                        </Col>
+                        {/* <Col md={9}>
                             <div id="navigation" style={{ display: state.isOpen ? "block" : "none" }}>
                                 <ul className="navigation-menu" id="top-menu">
                                     {data && data.menuLocation.menuItems.map(({ menu }) => {
@@ -147,23 +179,21 @@ function Topbar({ logo }) {
                                                     <a onClick={(event) => { event.preventDefault(); }}>{menu.name}</a>
                                                 </Link><span className="menu-arrow"></span>
 
-                                                <ul className={state.keyIssues ? "submenu open" : "submenu"}>
+                                                <ul className={"submenu"}>
                                                     {menu.children.map(childrenMenu => {
 
                                                         if (childrenMenu.children.length > 0) {
                                                             return (
                                                                 <li className="has-submenu">
                                                                     <Link href={`${getPath(menu)}${getPath(childrenMenu)}`}><a onClick={(event) => { event.preventDefault(); }}>{childrenMenu.name}</a></Link><span className="submenu-arrow"></span>
-                                                                    <ul className={state.organisation ? "submenu open" : "submenu"}>
+                                                                    <ul className={"submenu"}>
                                                                         {childrenMenu.children.map(subChildrenMenu => {
-                                                                            // return < li > <Link href={`${getPath(menu)}${getPath(childrenMenu)}${getPath(subChildrenMenu)}`}><a>{subChildrenMenu.name}</a></Link></li>
                                                                             return <li><Link href={`/${subChildrenMenu.destinationType}?slug=${getSlug(subChildrenMenu)}`} as={`${getPath(menu)}${getPath(childrenMenu)}${getPath(subChildrenMenu)}`}><a>{subChildrenMenu.name}</a></Link></li>
                                                                         })}
                                                                     </ul>
                                                                 </li>
                                                             )
                                                         } else {
-                                                            // return <li><Link href={`${getPath(menu)}${getPath(childrenMenu)}`}><a>{childrenMenu.name}</a></Link></li>
                                                             return <li><Link href={`/${childrenMenu.destinationType}?slug=${getSlug(childrenMenu)}`} as={`${getPath(menu)}${getPath(childrenMenu)}`}><a>{childrenMenu.name}</a></Link></li>
                                                         }
 
@@ -176,7 +206,7 @@ function Topbar({ logo }) {
                                     })}
                                 </ul>
                             </div>
-                        </Col>
+                        </Col> */}
                     </Row>
                 </div>
             </header>

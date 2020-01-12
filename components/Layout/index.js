@@ -32,11 +32,11 @@ function Layout({ children }) {
     data
   } = useQuery(GET_PAGE_SETTINGS);
 
-  useEffect(() => {
-    if (data) {
-      console.log(data)
-    }
-  }, [data])
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log(data)
+  //   }
+  // }, [data])
 
 
   // componentDidMount() {

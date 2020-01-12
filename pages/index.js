@@ -55,14 +55,13 @@ const Home = () => {
   const router = useRouter();
   const { data } = useQuery(GET_PAGE, {
     variables: {
-      slug: router.query.slug
+      slug: router.query.slug || router.pathname
     }
   });
 
   // useEffect(() => {
-  //   if (data) {
-  //     console.log(data.page.content[0].carousel.template.name)
-  //   }
+  //   console.log(router.query.slug)
+  //   console.log(data)
   // }, [data])
 
   useEffect(() => {

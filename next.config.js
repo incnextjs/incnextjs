@@ -37,90 +37,141 @@ module.exports = withFonts(withCSS(withSass({
             cache: new InMemoryCache().restore({}),
         });
 
-        const GET_MENUS = gql`
-            query getTopbarMenu {
-                  menuLocation(filter:{name:{eq:"Topbar"}}) {
-                      menuItems {
-                        menu {
-                          name
-                          path
-                          navigation {
-                            slug
-                        }
-                        destinationType
-                      children {
-                            name
-                            path
-                            navigation {
-                              slug
-                        }
-                        destinationType
-                        children {
-                              name
-                              path
-                              navigation {
-                                slug
-                          }
-                          destinationType
+        const GET_PAGES = gql`
+            query getPages {
+                allPages {
+                     slug
+                     renderPage
                     }
-                  }
-                }
-              }
-            }
-        }
-        `
-
-        const getPath = (menu) => {
-            return `${(menu.path && `/${menu.path}`) || (menu.navigation && `/${menu.navigation.slug}`) || ``}`
-        }
-
-        const getSlug = (menu) => {
-            return `${(menu.path && `${menu.path}`) || (menu.navigation && `${menu.navigation.slug}`) || ``}`
-        }
+                }`
 
         let dynamicPathMap = {};
 
         try {
-            const { data: { menuLocation: { menuItems } } } = await client.query({ query: GET_MENUS });
+            const { data: { allPages } } = await client.query({ query: GET_PAGES });
 
-            menuItems.map(({ menu }) => {
+            allPages.map(page => {
+                dynamicPathMap[page.slug] = { page: `/${page.renderPage}`, query: { slug: page.slug } }
+            })
 
-                if (menu.children.length > 0) {
-                    menu.children.map(childrenMenu => {
+            // menuItems.map(({ menu }) => {
 
-                        if (childrenMenu.children.length > 0) {
-                            childrenMenu.children.map(subChildrenMenu => {
-                                dynamicPathMap[`${getPath(menu)}${getPath(childrenMenu)}${getPath(subChildrenMenu)}`] = {
-                                    page: `/${subChildrenMenu.destinationType}`,
-                                    query: { slug: getSlug(subChildrenMenu) }
-                                }
-                            });
-                        }
-                        else {
-                            dynamicPathMap[`${getPath(menu)}${getPath(childrenMenu)}`] = {
-                                page: `/${childrenMenu.destinationType}`,
-                                query: { slug: getSlug(childrenMenu) }
-                            }
-                        }
-                    });
-                    
-                } else {
+            //     if (menu.children.length > 0) {
+            //         menu.children.map(childrenMenu => {
 
-                    dynamicPathMap[`${getPath(menu)}`] = {
-                        page: `/${menu.destinationType}`,
-                        query: { slug: getSlug(menu) }
-                    }
+            //             if (childrenMenu.children.length > 0) {
+            //                 childrenMenu.children.map(subChildrenMenu => {
+            //                     dynamicPathMap[`${getPath(menu)}${getPath(childrenMenu)}${getPath(subChildrenMenu)}`] = {
+            //                         page: `/${subChildrenMenu.destinationType}`,
+            //                         query: { slug: getSlug(subChildrenMenu) }
+            //                     }
+            //                 });
+            //             }
+            //             else {
+            //                 dynamicPathMap[`${getPath(menu)}${getPath(childrenMenu)}`] = {
+            //                     page: `/${childrenMenu.destinationType}`,
+            //                     query: { slug: getSlug(childrenMenu) }
+            //                 }
+            //             }
+            //         });
 
-                }
-            });
+            //     } else {
+
+            //         dynamicPathMap[`${getPath(menu)}`] = {
+            //             page: `/${menu.destinationType}`,
+            //             query: { slug: getSlug(menu) }
+            //         }
+
+            //     }
+            // });
             console.log(dynamicPathMap)
         } catch (error) {
             console.log(err);
         }
 
+        // const GET_MENUS = gql`
+        //     query getTopbarMenu {
+        //           menuLocation(filter:{name:{eq:"Topbar"}}) {
+        //               menuItems {
+        //                 menu {
+        //                   name
+        //                   path
+        //                   navigation {
+        //                     slug
+        //                 }
+        //                 destinationType
+        //               children {
+        //                     name
+        //                     path
+        //                     navigation {
+        //                       slug
+        //                 }
+        //                 destinationType
+        //                 children {
+        //                       name
+        //                       path
+        //                       navigation {
+        //                         slug
+        //                   }
+        //                   destinationType
+        //             }
+        //           }
+        //         }
+        //       }
+        //     }
+        // }
+        // `
+
+        // const getPath = (menu) => {
+        //     return `${(menu.path && `/${menu.path}`) || (menu.navigation && `/${menu.navigation.slug}`) || ``}`
+        // }
+
+        // const getSlug = (menu) => {
+        //     return `${(menu.path && `${menu.path}`) || (menu.navigation && `${menu.navigation.slug}`) || ``}`
+        // }
+
+        // let dynamicPathMap = {};
+
+        // try {
+        //     const { data: { menuLocation: { menuItems } } } = await client.query({ query: GET_MENUS });
+
+        //     menuItems.map(({ menu }) => {
+
+        //         if (menu.children.length > 0) {
+        //             menu.children.map(childrenMenu => {
+
+        //                 if (childrenMenu.children.length > 0) {
+        //                     childrenMenu.children.map(subChildrenMenu => {
+        //                         dynamicPathMap[`${getPath(menu)}${getPath(childrenMenu)}${getPath(subChildrenMenu)}`] = {
+        //                             page: `/${subChildrenMenu.destinationType}`,
+        //                             query: { slug: getSlug(subChildrenMenu) }
+        //                         }
+        //                     });
+        //                 }
+        //                 else {
+        //                     dynamicPathMap[`${getPath(menu)}${getPath(childrenMenu)}`] = {
+        //                         page: `/${childrenMenu.destinationType}`,
+        //                         query: { slug: getSlug(childrenMenu) }
+        //                     }
+        //                 }
+        //             });
+
+        //         } else {
+
+        //             dynamicPathMap[`${getPath(menu)}`] = {
+        //                 page: `/${menu.destinationType}`,
+        //                 query: { slug: getSlug(menu) }
+        //             }
+
+        //         }
+        //     });
+        //     console.log(dynamicPathMap)
+        // } catch (error) {
+        //     console.log(err);
+        // }
         return {
             ...dynamicPathMap,
-            '/': { page: '/index', query: {slug:'index'} },
+            // '/index': { page: '/index', query: { slug: '/index' } },
             // '/index': { page: '/index' },
         }
     }
