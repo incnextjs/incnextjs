@@ -219,7 +219,7 @@
     #topnav {
         .navigation-menu {
             display: flex;
-            justify-content: center;
+            justify-content: start;
             > .has-submenu {
                 > .submenu {
                     > .has-submenu {
@@ -266,7 +266,7 @@
                     z-index: 1000;
                     padding: 15px 0;
                     list-style: none;
-                    min-width: 180px;
+                    min-width: 220px;
                     visibility: hidden;
                     opacity: 0;
                     margin-top: 10px;
