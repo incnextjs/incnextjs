@@ -36,9 +36,10 @@ function Layout({ children }) {
 
   useEffect(() => {
     document.getElementById("pageLoader").style.display = "block";
-    window.addEventListener('load', () => {
-      setTimeout(function () { document.getElementById("pageLoader").style.display = "none"; }, 200);
-    })
+    // window.addEventListener('load', () => {
+    //   setTimeout(function () { document.getElementById("pageLoader").style.display = "none"; }, 200);
+    // })
+    setTimeout(function () { document.getElementById("pageLoader").style.display = "none"; }, 1000);
   },[]);
 
   // useEffect(() => {

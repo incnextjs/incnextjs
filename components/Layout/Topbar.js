@@ -48,13 +48,9 @@ function Topbar({ logo }) {
         var matchingMenuItem = null;
         var ul = document.getElementById("top-menu");
         var items = ul.getElementsByTagName("a");
-        // console.log(items)
         for (var i = 0; i < items.length; ++i) {
-            // console.log(window.location.pathname  + '----> ', items[i].pathname)
-            if (window.location.pathname === items[i].pathname) {
+            if (window.location.pathname === items[i].getAttribute('href')) {
                 matchingMenuItem = items[i];
-                // console.log('original: ', items[i].pathname)
-                // console.log(window.location.pathname  + '----> ', items[i].pathname)
                 break;
             }
         }
@@ -77,14 +73,14 @@ function Topbar({ logo }) {
             if (parent1) {
                 const parent2 = parent1.parentElement;
                 parent2.classList.add('active'); // li
-                // if (parent2) {
-                //     const parent3 = parent2.parentElement;
-                //     parent3.classList.add('active'); // li
-                //     if (parent3) {
-                //         const parent4 = parent3.parentElement;
-                //         parent4.classList.add('active'); // li
-                //     }
-                // }
+                if (parent2) {
+                    const parent3 = parent2.parentElement;
+                    parent3.classList.add('active'); // li
+                    if (parent3) {
+                        const parent4 = parent3.parentElement;
+                        parent4.classList.add('active'); // li
+                    }
+                }
             }
         }
     }
