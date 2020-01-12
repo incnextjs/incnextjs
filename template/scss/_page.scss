@@ -12,10 +12,18 @@
         }
     }
     .text-record {
-        > p {
+        > p, h3,h4,h5,h6,li, div {
             margin-top: 10px;
             margin-bottom: 0px;
+        }
+        > p, li {
             font-size: 14px;
+        }
+        > h3 {
+            font-size: 18px;
+        }
+        > h4 {
+            font-size: 16px;
         }
     }
 }

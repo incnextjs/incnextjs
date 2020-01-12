@@ -77,7 +77,6 @@ class PageSidebarTemplate extends Component {
                                                         return <div className="text-record" dangerouslySetInnerHTML={{ __html: contentModule.text }} />
                                                 }
                                             })}
-
                                         </div>
                                     </div>
                                 </div>

@@ -19,6 +19,7 @@ class PageTabTemplate extends Component {
     componentDidMount() {
         document.body.classList = "";
         window.addEventListener("scroll", this.scrollNavigation, true);
+        console.log(this.props.content)
 
         // select first tab
         const { tabs } = this.props;
@@ -149,12 +150,25 @@ class PageTabTemplate extends Component {
                                                     className="img-fluid rounded-top" alt="" />
                                             )}
                                         </div>
-                                        <div className="content p-4">
+                                        <div className="content p-4 page-content">
                                             {tabs.map(tab => (
-                                                <div style={!currentTab || currentTab.key != tab.id ? { display: 'none' } : {}} >
+                                                <div style={tab.id != currentTab.key ? { display: 'none' } : {}} >
                                                     {tab.children.map(childTab => (
-                                                        <div style={!currentTab || currentTab.currentChild != childTab.id ? { display: 'none' } : {}}
-                                                            dangerouslySetInnerHTML={{ __html: childTab.content }} />
+                                                        <div style={childTab.id != currentTab.currentChild ? { display: 'none' } : {}}>
+                                                            {childTab.content.map(contentModule => {
+                                                                switch (contentModule.__typename) {
+                                                                    case 'HeadingRecord':
+                                                                        return <h5 className="heading-record">{contentModule.text}</h5>
+                                                                    case 'TextRecord':
+                                                                        return <div className="text-record" dangerouslySetInnerHTML={{ __html: contentModule.text }} />
+                                                                    case 'QuoteRecord':
+                                                                        return <blockquote className="blockquote mt-3 p-3">
+                                                                            <p className="text-muted mb-0 font-italic">{contentModule.text}</p>
+                                                                        </blockquote>
+                                                                    default: return null;
+                                                                }
+                                                            })}
+                                                        </div>
                                                     ))}
                                                 </div>
                                             ))}

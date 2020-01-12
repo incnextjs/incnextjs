@@ -7,10 +7,10 @@ import { withApollo } from '../apollo/client';
 import PageSidebarTemplate from '../components/PageSidebarTemplate';
 import PageTabTemplate from '../components/PageTabTemplate';
 
-
 const GET_PAGE = gql`
   query getPage($slug: String!) {
     page(filter:{slug:{eq:$slug}}) {
+      id
       title
       pageTemplate {
         name
@@ -33,20 +33,32 @@ const GET_PAGE = gql`
         }
         ... on TabContentRecord {
           tab {
+            id
             tabs {
+              id
               tab {
                 id
                 title
                 children {
                   id
                   title
+                  content {
+                      ... on HeadingRecord {
+                        text
+                      }
+                      ... on TextRecord {
+                        text
+                      }
+                      ... on QuoteRecord {
+                        text
+                      }
+                  }
                 }
               }
             }
           }
         }
       }
-      updatedAt
     }
   }
   `;
@@ -76,7 +88,8 @@ function Page() {
       case 'Tab Page':
         const tab = content.find(item => item.__typename == 'TabContentRecord');
         const tabs = tab && tab.tab.tabs.map(({ tab }) => { return tab }) || [];
-        return <PageTabTemplate title={title} featuredImage={featuredImage && featuredImage.responsiveImage || null} tabs={tabs} />
+        return <PageTabTemplate title={title} featuredImage={featuredImage && featuredImage.responsiveImage || null} tabs={tabs} 
+        content={content}/>
       default:
         return <p>Page template is not supported!</p>
     }

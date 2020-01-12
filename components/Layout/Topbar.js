@@ -65,7 +65,6 @@ function Topbar({ logo }) {
 
     const activateParentDropdown = (item) => {
         const parent = item.parentElement;
-        console.log(item)
         if (parent) {
             parent.classList.add('active'); // li
             const parent1 = parent.parentElement;
