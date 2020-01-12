@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { Row, Col } from 'reactstrap';
-import moment from 'moment';
 
 
 class PageSidebarTemplate extends Component {
@@ -37,7 +36,7 @@ class PageSidebarTemplate extends Component {
     render() {
         const { title, featuredImage, content, updatedAt } = this.props;
         return (
-            <React.Fragment>
+            <div className="default-page">
                 <Head>
                     <title>{title}</title>
                 </Head>
@@ -85,7 +84,7 @@ class PageSidebarTemplate extends Component {
 
                             <Col lg={4} md={5} className="col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                                 <div className="sidebar mt-sm-30 p-4 rounded shadow">
-                                    <div className="widget mb-4 pb-2">
+                                    {/* <div className="widget mb-4 pb-2">
                                         <h4 className="widget-title">Search</h4>
                                         <div id="search2" className="widget-search mt-4 mb-0">
                                             <form role="search" method="get" id="searchform" className="searchform">
@@ -95,13 +94,23 @@ class PageSidebarTemplate extends Component {
                                                 </div>
                                             </form>
                                         </div>
+                                    </div> */}
+                                    <div className="widget">
+                                        <h4 className="widget-title">SUBSCRIBE FOR NEWSLETTERS</h4>
+                                        <div className="foot-subscribe form-group position-relative">
+                                            <i className="fas fa-at ml-3 icons" style={{lineHeight:2.5}}></i>
+                                            <input type="email" name="email" id="emailsubscribe" className="form-control pl-5 rounded" placeholder="Your email : " required />
+                                        </div>
+                                        <div className="col-lg-12">
+                                            <input type="submit" id="submitsubscribe" name="send" className="btn btn-primary w-100" value="Subscribe" />
+                                        </div>
                                     </div>
                                 </div>
                             </Col>
                         </Row>
                     </div>
                 </section>
-            </React.Fragment>
+            </div>
         );
     }
 }

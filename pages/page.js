@@ -88,8 +88,8 @@ function Page() {
       case 'Tab Page':
         const tab = content.find(item => item.__typename == 'TabContentRecord');
         const tabs = tab && tab.tab.tabs.map(({ tab }) => { return tab }) || [];
-        return <PageTabTemplate title={title} featuredImage={featuredImage && featuredImage.responsiveImage || null} tabs={tabs} 
-        content={content}/>
+        return <PageTabTemplate title={title} featuredImage={featuredImage && featuredImage.responsiveImage || null} tabs={tabs}
+          content={content} />
       default:
         return <p>Page template is not supported!</p>
     }

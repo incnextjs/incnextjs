@@ -74,7 +74,7 @@ class PageTabTemplate extends Component {
         const { title, featuredImage, content, tabs } = this.props;
         const { currentTab } = this.state;
         return (
-            <React.Fragment>
+            <div className="default-page">
                 <Head>
                     <title>{title}</title>
                 </Head>
@@ -179,7 +179,7 @@ class PageTabTemplate extends Component {
                         </Row>
                     </div>
                 </section>
-            </React.Fragment >
+            </div >
         );
     }
 }

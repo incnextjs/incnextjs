@@ -123,7 +123,7 @@ function OnlineMembership() {
     if (data) {
         const { page: { content, featuredImage } } = data;
         return (
-            <React.Fragment>
+            <div className="default-page">
 
                 {/* <div id="preloader">
                     <div id="status">
@@ -302,7 +302,7 @@ function OnlineMembership() {
                     </div>
                 </section>
 
-            </React.Fragment>
+            </div>
         )
     }
     return null;

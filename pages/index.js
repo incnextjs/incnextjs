@@ -84,7 +84,7 @@ const Home = () => {
   if (data) {
     const { content } = data.page;
     return (
-      <React.Fragment>
+      <div className="default-page">
         <section className="section bg-home" style={{ background: `url(${homeShape})`, backgroundPosition: "center center", height: "auto" }} id="home">
           <div className="home-center">
             <div className="home-desc-center">
@@ -131,7 +131,7 @@ const Home = () => {
           }
         })}
 
-      </React.Fragment>
+      </div>
     )
   }
   return null;
