@@ -10,9 +10,11 @@ const GET_MENUS = gql`
     menuLocation(filter:{name:{eq:"Topbar"}}) {
         menuItems {
           menu {
+              id
             name
             pathname
             children {
+                id
               name
               pathname
               children {
@@ -84,14 +86,6 @@ function Topbar({ logo }) {
         }
     }
 
-    const getPath = (menu) => {
-        // return `${(menu.path != '' && `/${menu.path}`) || (menu.navigation && `/${menu.navigation.slug}`) || ``}`
-    }
-
-    const getSlug = (menu) => {
-        return `${(menu.path && `${menu.path}`) || (menu.navigation && `${menu.navigation.slug}`) || ``}`
-    }
-
     return (
         <React.Fragment>
             <header id="topnav" className="defaultscroll sticky">
@@ -110,9 +104,6 @@ function Topbar({ logo }) {
                                     <Link href="/index"><a className="logo">Landrick<span className="text-primary">.</span></a></Link>
                                 )}
                         </Col>
-                        {/* <div className="buy-button">
-                        <Link href="#"><a className="btn btn-primary">Online Membership</a></Link>
-                    </div> */}
                         <div className="menu-extras">
                             <div className="menu-item">
                                 <a href="#" onClick={toggleLine} className={state.isOpen ? "navbar-toggle open" : "navbar-toggle"} >
@@ -163,50 +154,13 @@ function Topbar({ logo }) {
                                 </ul>
                             </div>
                         </Col>
-                        {/* <Col md={9}>
-                            <div id="navigation" style={{ display: state.isOpen ? "block" : "none" }}>
-                                <ul className="navigation-menu" id="top-menu">
-                                    {data && data.menuLocation.menuItems.map(({ menu }) => {
-
-                                        if (menu.children.length > 0) {
-                                            return <li className="has-submenu">
-                                                <Link href={getPath(menu)}>
-                                                    <a onClick={(event) => { event.preventDefault(); }}>{menu.name}</a>
-                                                </Link><span className="menu-arrow"></span>
-
-                                                <ul className={"submenu"}>
-                                                    {menu.children.map(childrenMenu => {
-
-                                                        if (childrenMenu.children.length > 0) {
-                                                            return (
-                                                                <li className="has-submenu">
-                                                                    <Link href={`${getPath(menu)}${getPath(childrenMenu)}`}><a onClick={(event) => { event.preventDefault(); }}>{childrenMenu.name}</a></Link><span className="submenu-arrow"></span>
-                                                                    <ul className={"submenu"}>
-                                                                        {childrenMenu.children.map(subChildrenMenu => {
-                                                                            return <li><Link href={`/${subChildrenMenu.destinationType}?slug=${getSlug(subChildrenMenu)}`} as={`${getPath(menu)}${getPath(childrenMenu)}${getPath(subChildrenMenu)}`}><a>{subChildrenMenu.name}</a></Link></li>
-                                                                        })}
-                                                                    </ul>
-                                                                </li>
-                                                            )
-                                                        } else {
-                                                            return <li><Link href={`/${childrenMenu.destinationType}?slug=${getSlug(childrenMenu)}`} as={`${getPath(menu)}${getPath(childrenMenu)}`}><a>{childrenMenu.name}</a></Link></li>
-                                                        }
-
-                                                    })}
-                                                </ul>
-
-                                            </li>
-                                        }
-                                        return <li><Link href={`/${menu.destinationType}${getSlug(menu)}`} as={`${getPath(menu)}`}><a>{menu.name}</a></Link></li>
-                                    })}
-                                </ul>
-                            </div>
-                        </Col> */}
                     </Row>
                 </div>
             </header>
         </React.Fragment>
     );
+
+
 }
 
 export default withApollo(Topbar);
