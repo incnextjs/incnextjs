@@ -6,10 +6,16 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks'
 import { Row, Col } from 'reactstrap';
 import BlogCarousel from '../components/Carousel/BlogCarousel';
+import InfiniteCarousel from '../components/Carousel/InfiniteCarousel';
+import SliderHome from '../components/Carousel/SliderHome';
 
 // Import images
 import homeShape from '../template/images/saas/home-shape.png';
-import InfiniteCarousel from '../components/Carousel/InfiniteCarousel';
+
+// import images
+import insurance from "../template/images/icon/insurance.svg";
+import graduationHat from "../template/images/icon/graduation-hat.svg";
+import ai from "../template/images/icon/ai.svg";
 
 const GET_PAGE = gql`
   query getPage($slug: String!) {
@@ -27,6 +33,7 @@ const GET_PAGE = gql`
       content {
         ... on CarouselReferenceRecord {
           carousel {
+            id
             name
             template {
               name
@@ -34,6 +41,7 @@ const GET_PAGE = gql`
             items {
               title
               subtitle
+              description
               image {
                 responsiveImage {
                   src
@@ -59,10 +67,10 @@ const Home = () => {
     }
   });
 
-  // useEffect(() => {
-  //   console.log(router.query.slug)
-  //   console.log(data)
-  // }, [data])
+  useEffect(() => {
+    // console.log(router.query.slug)
+    console.log(data)
+  }, [data])
 
   useEffect(() => {
     document.body.classList = "";
@@ -85,28 +93,7 @@ const Home = () => {
     const { content } = data.page;
     return (
       <div className="default-page">
-        <section className="section bg-home" style={{ background: `url(${homeShape})`, backgroundPosition: "center center", height: "auto" }} id="home">
-          <div className="home-center">
-            <div className="home-desc-center">
-              <div className="container">
-                <Row className="justify-content-center">
-                  <Col md={9} className="text-center mt-0 mt-md-5 pt-0 pt-md-5">
-                    <div className="title-heading margin-top-100">
-                      <h1 className="heading mb-3">Conduct More Customer In A Better Way</h1>
-                      <p className="para-desc mx-auto text-muted">Launch your campaign and benefit from our expertise on designing and managing conversion centered bootstrap4 html page.</p>
-                      <div className="mt-4 pt-2">
-                        <Link href="#about"><a className="btn btn-primary">Start Free Trial <i className="mdi mdi-chevron-right"></i></a></Link>
-                      </div>
-                    </div>
-                    {/* <div className="home-dashboard">
-                    <img src={homeImg} alt="" className="img-fluid" />
-                  </div> */}
-                  </Col>
-                </Row>
-              </div>
-            </div>
-          </div>
-        </section>
+
         {content.map(contentModule => {
           switch (contentModule.__typename) {
             case "CarouselReferenceRecord":
@@ -122,6 +109,53 @@ const Home = () => {
                     <section className="section container">
                       <InfiniteCarousel data={contentModule.carousel} />
                     </section>
+                  )
+                case 'Home':
+                  return (
+                    <React.Fragment>
+                    <SliderHome data={contentModule.carousel} />
+                    <section className="section">
+                      <div className="container">
+                        <Row>
+                          <Col md={4}>
+                            <div className="course-feature text-center position-relative d-block overflow-hidden bg-white rounded p-4 pt-5 pb-5">
+                              <div className="icon">
+                                <img src={insurance} height="55" alt="" />
+                              </div>
+                              <h4 className="mt-3"><Link href="#" className="title text-dark"> Unlimited Access</Link></h4>
+                              <p className="text-muted">It is a long established fact that a reader will be of a page reader will be of a page when looking at its layout. </p>
+                              {/* <Link href="#" className="text-primary read-more">Read More <i className="mdi mdi-chevron-right"></i></Link> */}
+                              <img src={insurance} className="full-img" height="300" alt="" />
+                            </div>
+                          </Col>
+
+                          <Col md={4}>
+                            <div className="course-feature text-center position-relative d-block overflow-hidden bg-white rounded p-4 pt-5 pb-5">
+                              <div className="icon">
+                                <img src={graduationHat} height="55" alt="" />
+                              </div>
+                              <h4 className="mt-3"><Link href="#" className="title text-dark"> Our Courses</Link></h4>
+                              <p className="text-muted">It is a long established fact that a reader will be of a page when reader will be of a page looking at its layout. </p>
+                              {/* <Link href="#" className="text-primary read-more">Read More <i className="mdi mdi-chevron-right"></i></Link> */}
+                              <img src={graduationHat} className="full-img" height="300" alt="" />
+                            </div>
+                          </Col>
+
+                          <Col md={4}>
+                            <div className="course-feature text-center position-relative d-block overflow-hidden bg-white rounded mb-0 p-4 pt-5 pb-5">
+                              <div className="icon">
+                                <img src={ai} height="55" alt="" />
+                              </div>
+                              <h4 className="mt-3"><Link href="#" className="title text-dark"> Expert Teachers</Link></h4>
+                              <p className="text-muted">It is a long established fact that a reader will be of a page when reader will be of a page looking at its layout. </p>
+                              {/* <Link href="#" className="text-primary read-more">Read More <i className="mdi mdi-chevron-right"></i></Link> */}
+                              <img src={ai} className="full-img" height="300" alt="" />
+                            </div>
+                          </Col>
+                        </Row>
+                      </div>
+                    </section>
+                    </React.Fragment>
                   )
                 default:
                   return null;
