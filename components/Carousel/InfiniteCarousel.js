@@ -84,7 +84,7 @@ function InfiniteCarousel({ data }) {
       <Carousel
         responsive={responsive}
         infinite={true}
-        ssr={true}
+        ssr={false}
         removeArrowOnDeviceType={['superLargeDesktop','desktop','tablet','mobile']}
       >
         {data.items.map(item => (

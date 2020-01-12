@@ -118,50 +118,48 @@ function Topbar({ logo }) {
                                 </div>
                             </div>
                         </Col>
-                            <div id="navigation" style={{ display: state.isOpen ? "block" : "none" }}>
-                                <ul className="navigation-menu" id="top-menu">
-                                    {data && data.menuLocation.menuItems.map(({ menu }) => {
+                        <div id="navigation" style={{ display: state.isOpen ? "block" : "none" }}>
+                            <ul className="navigation-menu" id="top-menu">
+                                {data && data.menuLocation.menuItems.map(({ menu }) => {
 
-                                        if (menu.children.length > 0) {
-                                            return <li className="has-submenu">
-                                                <Link href={menu.pathname || ''}>
-                                                    <a onClick={(event) => { event.preventDefault(); }}>{menu.name}</a>
-                                                </Link><span className="menu-arrow"></span>
+                                    if (menu.children.length > 0) {
+                                        return <li className="has-submenu">
+                                            <Link href={menu.pathname || ''}>
+                                                <a onClick={(event) => { event.preventDefault(); }}>{menu.name}</a>
+                                            </Link><span className="menu-arrow"></span>
 
-                                                <ul className={"submenu"}>
-                                                    {menu.children.map(childrenMenu => {
+                                            <ul className={"submenu"}>
+                                                {menu.children.map(childrenMenu => {
 
-                                                        if (childrenMenu.children.length > 0) {
-                                                            return (
-                                                                <li className="has-submenu">
-                                                                    <Link href={childrenMenu.pathname || ''}><a onClick={(event) => { event.preventDefault(); }}>{childrenMenu.name}</a></Link><span className="submenu-arrow"></span>
-                                                                    <ul className={"submenu"}>
-                                                                        {childrenMenu.children.map(subChildrenMenu => {
-                                                                            return <li><Link href={subChildrenMenu.pathname || ''}><a>{subChildrenMenu.name}</a></Link></li>
-                                                                        })}
-                                                                    </ul>
-                                                                </li>
-                                                            )
-                                                        } else {
-                                                            return <li><Link href={childrenMenu.pathname || ''}><a>{childrenMenu.name}</a></Link></li>
-                                                        }
+                                                    if (childrenMenu.children.length > 0) {
+                                                        return (
+                                                            <li className="has-submenu">
+                                                                <Link href={childrenMenu.pathname || ''}><a onClick={(event) => { event.preventDefault(); }}>{childrenMenu.name}</a></Link><span className="submenu-arrow"></span>
+                                                                <ul className={"submenu"}>
+                                                                    {childrenMenu.children.map(subChildrenMenu => {
+                                                                        return <li><Link href={subChildrenMenu.pathname || ''}><a>{subChildrenMenu.name}</a></Link></li>
+                                                                    })}
+                                                                </ul>
+                                                            </li>
+                                                        )
+                                                    } else {
+                                                        return <li><Link href={childrenMenu.pathname || ''}><a>{childrenMenu.name}</a></Link></li>
+                                                    }
 
-                                                    })}
-                                                </ul>
+                                                })}
+                                            </ul>
 
-                                            </li>
-                                        }
-                                        return <li><Link href={menu.pathname || ''}><a>{menu.name}</a></Link></li>
-                                    })}
-                                </ul>
-                            </div>
+                                        </li>
+                                    }
+                                    return <li><Link href={menu.pathname || ''}><a>{menu.name}</a></Link></li>
+                                })}
+                            </ul>
+                        </div>
                     </Row>
                 </div>
             </header>
         </React.Fragment>
     );
-
-
 }
 
 export default withApollo(Topbar);

@@ -34,7 +34,7 @@ function SliderHome({ data }) {
                 <Carousel
                     responsive={responsive}
                     infinite={true}
-                    ssr={true}
+                    ssr={false}
                     showDots={false}
                     removeArrowOnDeviceType={['superLargeDesktop','desktop','tablet','mobile']}
                 >

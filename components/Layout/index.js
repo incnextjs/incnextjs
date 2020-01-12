@@ -42,11 +42,11 @@ function Layout({ children }) {
     setTimeout(function () { document.getElementById("pageLoader").style.display = "none"; }, 1000);
   },[]);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log(data)
-  //   }
-  // }, [data])
+  useEffect(() => {
+    if (data) {
+      console.log(data)
+    }
+  }, [data])
 
 
   // componentDidMount() {
@@ -54,11 +54,11 @@ function Layout({ children }) {
   // setTimeout(function () { document.getElementById("pageLoader").style.display = "none"; }, 1000);
   // }
 
-  if (data) {
-    const { pageSetting: settings } = data;
+  // if (data) {
+  //   const { pageSetting: settings } = data;
     return (
       <React.Fragment>
-        <Topbar logo={settings.logo && settings.logo.responsiveImage || null} />
+        <Topbar logo={data && data.pageSetting.logo.responsiveImage || null} />
         {children}
         <Footer />
         <div id="bottomIcon">
@@ -66,8 +66,8 @@ function Layout({ children }) {
         </div>
       </React.Fragment>
     )
-  }
-  return null;
+  // }
+  // return null;
 }
 
 export default withApollo(Layout);
