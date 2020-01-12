@@ -3,12 +3,9 @@ import { Row, Col } from 'reactstrap';
 import Link from 'next/link';
 
 // Blog Images
-import blog1 from '../template/images/blog/01.jpg';
-import blog2 from '../template/images/blog/02.jpg';
-import blog3 from '../template/images/blog/03.jpg';
+import defaultImage from '../../template/images/blog/01.jpg';
 
-
-function PageCarousel({ data }) {
+function BlogCarousel({ data }) {
 
     return (
         <div className="container">
@@ -25,7 +22,7 @@ function PageCarousel({ data }) {
                     <Col lg={4} md={6} className="mt-4 pt-2">
                         <div className="blog position-relative overflow-hidden shadow rounded">
                             <div className="position-relative">
-                                <img src={item.image && item.image.responsiveImage.src || blog1}
+                                <img src={item.image && item.image.responsiveImage.src || defaultImage}
                                     srcSet={item.image && item.image.responsiveImage.srcSet || null}
                                     className="img-fluid rounded-top" alt="" />
                                 <div className="overlay rounded-top bg-dark"></div>
@@ -44,4 +41,4 @@ function PageCarousel({ data }) {
         </div>
     )
 }
-export default PageCarousel;
+export default BlogCarousel;

@@ -5,11 +5,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks'
 import { Row, Col } from 'reactstrap';
-import PageCarousel from '../components/PageCarousel';
+import BlogCarousel from '../components/Carousel/BlogCarousel';
 
 // Import images
 import homeShape from '../template/images/saas/home-shape.png';
-import homeImg from '../template/images/saas/home.png';
+import InfiniteCarousel from '../components/Carousel/InfiniteCarousel';
 
 const GET_PAGE = gql`
   query getPage($slug: String!) {
@@ -28,6 +28,9 @@ const GET_PAGE = gql`
         ... on CarouselReferenceRecord {
           carousel {
             name
+            template {
+              name
+            }
             items {
               title
               subtitle
@@ -46,6 +49,7 @@ const GET_PAGE = gql`
   }
   `;
 
+
 const Home = () => {
 
   const router = useRouter();
@@ -57,7 +61,7 @@ const Home = () => {
 
   // useEffect(() => {
   //   if (data) {
-  //     console.log(data)
+  //     console.log(data.page.content[0].carousel.template.name)
   //   }
   // }, [data])
 
@@ -107,11 +111,22 @@ const Home = () => {
         {content.map(contentModule => {
           switch (contentModule.__typename) {
             case "CarouselReferenceRecord":
-              return (
-                <section className="section bg-light">
-                  <PageCarousel data={contentModule.carousel}/>
-                </section>
-              )
+              switch (contentModule.carousel.template.name) {
+                case 'Blog':
+                  return (
+                    <section className="section bg-light">
+                      <BlogCarousel data={contentModule.carousel} />
+                    </section>
+                  );
+                case 'Infinite':
+                  return (
+                    <section className="section container">
+                      <InfiniteCarousel data={contentModule.carousel} />
+                    </section>
+                  )
+                default:
+                  return null;
+              }
             default:
               return null;
           }
