@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useQuery } from '@apollo/react-hooks'
 import { withApollo } from '../../apollo/client';
+import { Row, Col } from 'reactstrap';
 
 const GET_MENUS = gql`
   query getTopbarMenu {
@@ -37,7 +38,7 @@ const GET_MENUS = gql`
   }
   `;
 
-function Topbar() {
+function Topbar({ logo }) {
 
     const [state, setState] = useState({
         isOpen: false,
@@ -107,13 +108,24 @@ function Topbar() {
         <React.Fragment>
             <header id="topnav" className="defaultscroll sticky">
                 <div className="container">
-                    <div>
-                        <Link href="/index"><a className="logo">Landrick<span className="text-primary">.</span></a></Link>
-                    </div>
-                    {/* <div className="buy-button">
+                    <Row>
+                        <Col md={3} style={{
+                            display:'flex',
+                            alignItems:'center'
+                        }}>
+                            {logo && (
+                                <div>
+                                    <img src={logo.src} srcSet={logo.srcSet}
+                                        style={{ height: '100%', width: '100%' }} />
+                                </div>
+                            ) || (
+                                    <Link href="/index"><a className="logo">Landrick<span className="text-primary">.</span></a></Link>
+                                )}
+                        </Col>
+                        {/* <div className="buy-button">
                         <Link href="#"><a className="btn btn-primary">Online Membership</a></Link>
                     </div> */}
-                    <div className="menu-extras">
+                        {/* <div className="menu-extras">
                         <div className="menu-item">
                             <Link href="#" onClick={toggleLine} className={state.isOpen ? "navbar-toggle open" : "navbar-toggle"} >
                                 <div className="lines">
@@ -123,60 +135,49 @@ function Topbar() {
                                 </div>
                             </Link>
                         </div>
-                    </div>
+                    </div> */}
+                        <Col md={9}>
+                            <div id="navigation" style={{ display: state.isOpen ? "block" : "none" }}>
+                                <ul className="navigation-menu" id="top-menu">
+                                    {data && data.menuLocation.menuItems.map(({ menu }) => {
 
-                    <div id="navigation" style={{ display: state.isOpen ? "block" : "none" }}>
-                        <ul className="navigation-menu" id="top-menu">
-                            {data && data.menuLocation.menuItems.map(({ menu }) => {
+                                        if (menu.children.length > 0) {
+                                            return <li className="has-submenu">
+                                                <Link href={getPath(menu)}>
+                                                    <a onClick={(event) => { event.preventDefault(); }}>{menu.name}</a>
+                                                </Link><span className="menu-arrow"></span>
 
-                                if (menu.children.length > 0) {
-                                    return <li className="has-submenu">
-                                        <Link href={getPath(menu)}>
-                                            <a onClick={(event) => { event.preventDefault(); }}>{menu.name}</a>
-                                        </Link><span className="menu-arrow"></span>
+                                                <ul className={state.keyIssues ? "submenu open" : "submenu"}>
+                                                    {menu.children.map(childrenMenu => {
 
-                                        <ul className={state.keyIssues ? "submenu open" : "submenu"}>
-                                            {menu.children.map(childrenMenu => {
+                                                        if (childrenMenu.children.length > 0) {
+                                                            return (
+                                                                <li className="has-submenu">
+                                                                    <Link href={`${getPath(menu)}${getPath(childrenMenu)}`}><a onClick={(event) => { event.preventDefault(); }}>{childrenMenu.name}</a></Link><span className="submenu-arrow"></span>
+                                                                    <ul className={state.organisation ? "submenu open" : "submenu"}>
+                                                                        {childrenMenu.children.map(subChildrenMenu => {
+                                                                            // return < li > <Link href={`${getPath(menu)}${getPath(childrenMenu)}${getPath(subChildrenMenu)}`}><a>{subChildrenMenu.name}</a></Link></li>
+                                                                            return <li><Link href={`/${subChildrenMenu.destinationType}?slug=${getSlug(subChildrenMenu)}`} as={`${getPath(menu)}${getPath(childrenMenu)}${getPath(subChildrenMenu)}`}><a>{subChildrenMenu.name}</a></Link></li>
+                                                                        })}
+                                                                    </ul>
+                                                                </li>
+                                                            )
+                                                        } else {
+                                                            // return <li><Link href={`${getPath(menu)}${getPath(childrenMenu)}`}><a>{childrenMenu.name}</a></Link></li>
+                                                            return <li><Link href={`/${childrenMenu.destinationType}?slug=${getSlug(childrenMenu)}`} as={`${getPath(menu)}${getPath(childrenMenu)}`}><a>{childrenMenu.name}</a></Link></li>
+                                                        }
 
-                                                if (childrenMenu.children.length > 0) {
-                                                    return (
-                                                        <li className="has-submenu">
-                                                            <Link href={`${getPath(menu)}${getPath(childrenMenu)}`}><a onClick={(event) => { event.preventDefault(); }}>{childrenMenu.name}</a></Link><span className="submenu-arrow"></span>
-                                                            <ul className={state.organisation ? "submenu open" : "submenu"}>
-                                                                {childrenMenu.children.map(subChildrenMenu => {
-                                                                    // return < li > <Link href={`${getPath(menu)}${getPath(childrenMenu)}${getPath(subChildrenMenu)}`}><a>{subChildrenMenu.name}</a></Link></li>
-                                                                    return <li><Link href={`/${subChildrenMenu.destinationType}?slug=${getSlug(subChildrenMenu)}`} as={`${getPath(menu)}${getPath(childrenMenu)}${getPath(subChildrenMenu)}`}><a>{subChildrenMenu.name}</a></Link></li>
-                                                                })}
-                                                            </ul>
-                                                        </li>
-                                                    )
-                                                } else {
-                                                    // return <li><Link href={`${getPath(menu)}${getPath(childrenMenu)}`}><a>{childrenMenu.name}</a></Link></li>
-                                                    return <li><Link href={`/${childrenMenu.destinationType}?slug=${getSlug(childrenMenu)}`} as={`${getPath(menu)}${getPath(childrenMenu)}`}><a>{childrenMenu.name}</a></Link></li>
-                                                }
+                                                    })}
+                                                </ul>
 
-                                            })}
-                                        </ul>
-
-                                    </li>
-                                }
-                                return <li><Link href={`/${menu.destinationType}${getSlug(menu)}`} as={`${getPath(menu)}`}><a>{menu.name}</a></Link></li>
-                            })}
-                            {/* <li><Link href="/"><a>Home</a></Link></li>
-                            <li className="has-submenu">
-                                <Link href="/#"><a onClick={(event) => { event.preventDefault(); setState({ ...state, keyIssues: !state.keyIssues }) }} >Key Issues</a></Link><span className="menu-arrow"></span>
-                                <ul className={state.keyIssues ? "submenu open" : "submenu"}>
-                                    <li><Link href="/foreign-policy"><a>Foreign Policy</a></Link></li>
+                                            </li>
+                                        }
+                                        return <li><Link href={`/${menu.destinationType}${getSlug(menu)}`} as={`${getPath(menu)}`}><a>{menu.name}</a></Link></li>
+                                    })}
                                 </ul>
-                            </li>
-                            <li className="has-submenu">
-                                <Link href="/#"><a onClick={(event) => { event.preventDefault(); setState({ ...state, organisation: !state.organisation }) }} >Organisation</a></Link><span className="menu-arrow"></span>
-                                <ul className={state.organisation ? "submenu open" : "submenu"}>
-                                    <li><Link href="/our-achievements"><a>Our Achievements</a></Link></li>
-                                </ul>
-                            </li> */}
-                        </ul>
-                    </div>
+                            </div>
+                        </Col>
+                    </Row>
                 </div>
             </header>
         </React.Fragment>
