@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { withApollo } from '../../apollo/client';
+import {useRouter} from 'next/router';
 
 
 // Layout Components
@@ -26,6 +27,7 @@ const GET_PAGE_SETTINGS = gql`
   }
   `;
 
+
 function Layout({ children }) {
 
   const {
@@ -34,8 +36,10 @@ function Layout({ children }) {
 
   useEffect(() => {
     document.getElementById("pageLoader").style.display = "block";
-    setTimeout(function () { document.getElementById("pageLoader").style.display = "none"; }, 1000);
-  }, []);
+    window.addEventListener('load', () => {
+      setTimeout(function () { document.getElementById("pageLoader").style.display = "none"; }, 200);
+    })
+  },[]);
 
   // useEffect(() => {
   //   if (data) {
