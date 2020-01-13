@@ -18,6 +18,7 @@ const GET_MENUS = gql`
               name
               pathname
               children {
+                  id
                 name
                 pathname
               }
@@ -40,11 +41,16 @@ function Topbar({ logo, socialLinks }) {
         data
     } = useQuery(GET_MENUS);
 
-    // useEffect(() => {
-    //     if (data) {
-    //         console.log(data)
-    //     }
-    // }, [data])
+    useEffect(() => {
+        if (data) {
+            data.menuLocation.menuItems.map(({ menu }) => {
+                setState({ ...state, [menu.id]: false })
+                menu.children.map(childrenMenu => {
+                    setState({ ...state, [childrenMenu.id]: false })
+                });
+            });
+        }
+    }, [])
 
     useEffect(() => {
         var matchingMenuItem = null;
@@ -125,17 +131,22 @@ function Topbar({ logo, socialLinks }) {
                                     if (menu.children.length > 0) {
                                         return <li className="has-submenu">
                                             <Link href={menu.pathname || ''}>
-                                                <a onClick={(event) => { event.preventDefault(); }}>{menu.name}</a>
+                                                <a onClick={(event) => { event.preventDefault(); setState({ ...state, [menu.id]: !state[menu.id] }) }}>{menu.name}</a>
                                             </Link><span className="menu-arrow"></span>
 
-                                            <ul className={"submenu"}>
+                                            <ul className={state[menu.id] ? "submenu open" : "submenu"}>
                                                 {menu.children.map(childrenMenu => {
 
                                                     if (childrenMenu.children.length > 0) {
                                                         return (
                                                             <li className="has-submenu">
-                                                                <Link href={childrenMenu.pathname || ''}><a onClick={(event) => { event.preventDefault(); }}>{childrenMenu.name}</a></Link><span className="submenu-arrow"></span>
-                                                                <ul className={"submenu"}>
+                                                                <Link href={childrenMenu.pathname || ''}>
+                                                                    <a onClick={(event) => {
+                                                                        event.preventDefault();
+                                                                        setState({ ...state, [childrenMenu.id]: !state[childrenMenu.id] })
+                                                                    }}>{childrenMenu.name}</a></Link><span className="submenu-arrow"></span>
+                                                                    
+                                                                <ul className={state[childrenMenu.id] ? "submenu open" : "submenu"}>
                                                                     {childrenMenu.children.map(subChildrenMenu => {
                                                                         return <li><Link href={subChildrenMenu.pathname || ''}><a>{subChildrenMenu.name}</a></Link></li>
                                                                     })}
