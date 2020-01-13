@@ -27,25 +27,18 @@ function TabsHomePage({ data }) {
                 <Row className="justify-content-center">
                     <Col className="text-center">
                         <div className="section-title mb-60">
-                            <h4 className="main-title mb-4">{data.location}</h4>
+                            <h4 className="title mb-4">{data.location}</h4>
                             {/* <p className="text-muted para-desc mb-0 mx-auto">Start working with <span className="text-primary font-weight-bold">Landrick</span> that can provide everything you need to generate awareness, drive traffic, connect.</p> */}
 
-                            <Row className="mt-4 justify-content-center">
-                                <Col lg={12} md={12} className="text-center" style={{ marginTop: "32px" }}>
-                                    <Nav pills id="navnav" className="nav-justified flex-column flex-sm-row">
-                                        {data.tabs.map(({ tab }) => (
-                                            <NavItem>
-                                                <NavLink
-                                                    className={classnames({ active: activeTab === tab.id })}
-                                                    onClick={() => { toggle(tab.id); }}>
-                                                    <div style={{ minWidth: "200px" }} className="text-center pt-1 pb-1 rounded">
-                                                        <h4 className="title font-weight-normal mb-0">{tab.title}</h4>
-                                                    </div>
-                                                </NavLink>
-                                            </NavItem>
-                                        ))}
-                                    </Nav>
-                                </Col>
+                            <Row>
+                                <ul className="col container-filter list-unstyled categories-filter text-center" id="filter">
+                                    {data.tabs.map(({ tab }) => (
+                                        <li className="list-inline-item" onClick={e => toggle(tab.id)}>
+                                            <a className={`categories border d-block text-dark rounded ${activeTab == tab.id && 'active'}`}>
+                                                {tab.title}
+                                            </a></li>
+                                    ))}
+                                </ul>
                             </Row>
 
                         </div>
