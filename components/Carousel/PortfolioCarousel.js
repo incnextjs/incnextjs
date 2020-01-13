@@ -45,15 +45,20 @@ function PortfolioCarousel({ data }) {
                 {data.items.map(item => (
                     <Col lg={12} className="spacing designing" style={{cursor:'e-resize'}}>
                         <div className="work-container position-relative d-block overflow-hidden rounded mt-3">
-                            <a className="mfp-image d-inline-block" target="_blank" href={item.url} title="" >
+                            <div className="mfp-image d-inline-block" target="_blank">
                                 <img src={item.image && item.image.responsiveImage.src || defaultImage}
                                     srcSet={item.image && item.image.responsiveImage.srcSet || null}
                                     className="img-fluid rounded" alt="" />
                                 <div className="overlay-work"></div>
-                            </a>
+                            </div>
+                            <div style={{
+                                position:'absolute',
+                                right: 0, left: 0, top: 0, bottom: 0,
+                                background: 'linear-gradient(0deg, #0000009c, transparent)'
+                            }}/>
                             <div className="content">
-                                <a href={item.url} className="title text-white d-block font-weight-bold" style={{ textShadow: '1px 1px black' }}>{item.title}</a>
-                                <small className="text-light" style={{ textShadow: '1px 1px black' }}>{item.description}</small>
+                                <a href={item.url} className="title text-white d-block font-weight-bold">{item.title}</a>
+                                <small className="text-light">{item.description}</small>
                             </div>
                         </div>
                     </Col>
