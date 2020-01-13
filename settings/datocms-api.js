@@ -4,11 +4,13 @@ const client_id = 'c2afe34500c5de959544bb906fa129';
 
 const client = new SiteClient(client_id);
 
-async function createMember(title, first_name, middle_name, last_name, email, mobile_number, otp, state, voter_id) {
+async function createMember(title, first_name, middle_name, last_name, email, mobile_number, otp, state, voter_id, file) {
+    console.log(file)
     try {
-        // const path = await client.createUploadPath('https://imge.com/wp-content/uploads/2019/02/imge-new.png');
-        // const image = await client.uploadFile('https://imge.com/wp-content/uploads/2019/02/imge-new.png');
-        // console.log(image);
+        const uploadRequest = await client.uploadRequest.create({
+            "filename": file.name
+        });
+        const image = await client.uploadFile(file);
         const member = await client.items.create({
             itemType: '180848',
             title,
@@ -20,7 +22,7 @@ async function createMember(title, first_name, middle_name, last_name, email, mo
             otp,
             state,
             voter_id,
-            photo: null
+            photo: image
         });
         return member;
     } catch (error) {

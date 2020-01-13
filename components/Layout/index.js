@@ -43,11 +43,11 @@ function Layout({ children }) {
     setTimeout(function () { document.getElementById("pageLoader").style.display = "none"; }, 1000);
   },[]);
 
-  useEffect(() => {
-    if (data) {
-      console.log(data)
-    }
-  }, [data])
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log(data)
+  //   }
+  // }, [data])
 
 
   // componentDidMount() {

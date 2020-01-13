@@ -53,7 +53,8 @@ function OnlineMembership() {
         mobile_number: '',
         otp: '',
         state: '',
-        voter_id: ''
+        voter_id: '',
+        photo: null
     });
     const [submitting, setSubmitting] = useState(false);
     const [formError, setFormError] = useState(false);
@@ -66,7 +67,7 @@ function OnlineMembership() {
 
     useEffect(() => {
         // console.log(data)
-    }, [data])
+    }, []);
 
     useEffect(() => {
         document.body.classList = "";
@@ -100,7 +101,8 @@ function OnlineMembership() {
                 formData.mobile_number,
                 formData.otp,
                 formData.state,
-                formData.voter_id
+                formData.voter_id,
+                formData.photo
             );
             // console.log(member)
             setState({ ...state, Contactvisible: true });
@@ -115,6 +117,13 @@ function OnlineMembership() {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
+        })
+    }
+
+    function handleOnChangePhoto(e) {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.files[0]
         })
     }
 
@@ -241,8 +250,9 @@ function OnlineMembership() {
                                                     </Col>
                                                     <Col md={6}>
                                                         <div className="form-group position-relative">
-                                                            <label>Upload Photo</label>
-                                                            <input type="file" className="form-control" placeholder="Upload Photo" />
+                                                            <label>Upload Photo <span className="text-danger">*</span></label>
+                                                            <input type="file" className="form-control" placeholder="Upload Photo"
+                                                                name="photo" onChange={handleOnChangePhoto} required />
                                                         </div>
                                                     </Col>
                                                     <Col md={12}>
@@ -252,7 +262,7 @@ function OnlineMembership() {
                                                                 <label className="custom-control-label" htmlFor="customCheck1">
                                                                     I accept the membership <a href="https://www.inc.in/en/terms-conditions" className="text-primary">Terms And Conditions</a> &
                                                                    <a href="https://www.inc.in/en/inc-constitution" className="text-primary"> Constitution</a> as specified in the INC constitution.
-                                                                          I agree to be communicated to by the party via phone, SMS, email and other means.
+                                                                            I agree to be communicated to by the party via phone, SMS, email and other means.
                                                                     I am above 18 years of age and not a member of any other Political Party.</label>
                                                             </div>
                                                         </div>

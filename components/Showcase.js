@@ -28,8 +28,8 @@ function Showcase({ data }) {
                         </div>
                         <h4 className="mt-3"><Link href={item.url}><a className="title text-dark">{item.title}</a></Link></h4>
                         <Link href={item.url} ><a className="text-primary read-more">Read More <i className="fas fa-angle-right"></i></a></Link>
-                        <img src={item.icon && item.icon.responsiveImage.src}
-                            srcSet={item.icon && item.icon.responsiveImage.srcSet} className="full-img" height="300" alt="" />
+                        {/* <img src={item.icon && item.icon.responsiveImage.src}
+                            srcSet={item.icon && item.icon.responsiveImage.srcSet} className="full-img" height="300" alt="" /> */}
                     </div>
                 </Col>
             ))}
