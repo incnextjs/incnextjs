@@ -77,7 +77,9 @@ const GET_PAGE = gql`
             items {
               id
               title
+              description
               icon {
+                url
                 responsiveImage {
                   src
                   srcSet
