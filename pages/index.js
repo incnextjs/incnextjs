@@ -87,6 +87,7 @@ const GET_PAGE = gql`
                 title
                 externalVideo {
                   url
+                  providerUid
                   thumbnailUrl
                   width
                   height
@@ -203,7 +204,7 @@ const Home = () => {
                   return (
                     <section className="section-two bg-light">
                       <div className="container">
-                      <PortfolioCarousel data={contentModule.carousel} />
+                        <PortfolioCarousel data={contentModule.carousel} />
                       </div>
                     </section>
                   )
@@ -236,10 +237,10 @@ const Home = () => {
               switch (contentModule.mediaLibrary.category.name) {
                 case 'Speech':
                   return (
-                    <section className="section-two">
-                      {/* <div className="container"> */}
-                      <HomePageExternalVideo data={contentModule.mediaLibrary} />
-                      {/* </div> */}
+                    <section className="section-three">
+                      <div className="container">
+                        <HomePageExternalVideo data={contentModule.mediaLibrary} />
+                      </div>
                     </section>
                   )
                 default: return null;
