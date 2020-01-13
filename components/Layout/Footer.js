@@ -33,17 +33,15 @@ const GET_MENUS = gql`
   }
   `;
 
-function Footer({copyright}) {
+function Footer({ copyright, socialLinks }) {
 
     const {
         data
     } = useQuery(GET_MENUS);
 
-    // useEffect(() => {
-    //     if (data) {
-    //         console.log(data)
-    //     }
-    // }, [data])
+    useEffect(() => {
+        // console.log(socialLinks)
+    }, [])
 
     return (
         <React.Fragment>
@@ -57,12 +55,25 @@ function Footer({copyright}) {
                                     {data.widget.widgetContent.map(contentModule => {
                                         switch (contentModule.__typename) {
                                             case 'TextRecord':
-                                                return <div className="mt-4" style={{fontSize:14}} dangerouslySetInnerHTML={{ __html: contentModule.text }} />
+                                                return <div className="mt-4" style={{ fontSize: 14 }} dangerouslySetInnerHTML={{ __html: contentModule.text }} />
                                             default: return null;
                                         }
                                     })}
                                 </React.Fragment>
                             )}
+
+                            {/* SOCIAL LINKS */}
+                            <ul className="list-unstyled mt-4" style={{
+                                padding: 0,
+                                margin: 0
+                            }}>
+                                {socialLinks && socialLinks.map(socialLink => (
+                                    <li className="list-inline-item" style={{
+                                        padding: 5,
+                                        fontSize: 22,
+                                    }}><a href={socialLink.url}><i style={{ color: '#5a6d90' }} className={`${socialLink.iconCode} `}></i></a></li>
+                                ))}
+                            </ul>
                         </Col>
 
                         <Col md={8}>
@@ -96,7 +107,7 @@ function Footer({copyright}) {
                 </div>
             </footer>
 
-        </React.Fragment>
+        </React.Fragment >
     );
 
 

@@ -28,7 +28,7 @@ const GET_MENUS = gql`
   }
   `;
 
-function Topbar({ logo }) {
+function Topbar({ logo, socialLinks }) {
 
     const [state, setState] = useState({
         isOpen: false,
