@@ -19,7 +19,7 @@ class PageTabTemplate extends Component {
     componentDidMount() {
         document.body.classList = "";
         window.addEventListener("scroll", this.scrollNavigation, true);
-        console.log(this.props.content)
+        // console.log(this.props.content)
 
         // select first tab
         const { tabs } = this.props;
