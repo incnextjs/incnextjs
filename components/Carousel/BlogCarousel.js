@@ -1,6 +1,28 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
 import Link from 'next/link';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+const responsive = {
+    superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 4000, min: 3000 },
+        items: 3,
+    },
+    desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3,
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2,
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1,
+    },
+};
 
 // Blog Images
 import defaultImage from '../../template/images/blog/01.jpg';
@@ -17,9 +39,14 @@ function BlogCarousel({ data }) {
                     </div>
                 </Col>
             </Row>
-            <Row>
+            <Carousel
+                responsive={responsive}
+                infinite={true}
+                ssr={false}
+                removeArrowOnDeviceType={['superLargeDesktop', 'desktop', 'tablet', 'mobile']}
+            >
                 {data.items.map(item => (
-                    <Col lg={4} md={6} className="mt-4 pt-2">
+                    <Col className="mt-4 pt-2">
                         <div className="blog position-relative overflow-hidden shadow rounded">
                             <div className="position-relative">
                                 <img src={item.image && item.image.responsiveImage.src || defaultImage}
@@ -30,14 +57,14 @@ function BlogCarousel({ data }) {
                             <div className="content p-4">
                                 <h4>{item.title}</h4>
                                 <p>{item.subtitle}</p>
-                                <div className="post-meta mt-3" style={{textAlign:'right'}}>
+                                <div className="post-meta mt-3" style={{ textAlign: 'right' }}>
                                     <Link href={item.url}><a className="text-muted readmore">Read More <i className="fas fa-angle-right"></i></a></Link>
                                 </div>
                             </div>
                         </div>
                     </Col>
                 ))}
-            </Row>
+            </Carousel>
         </div>
     )
 }
