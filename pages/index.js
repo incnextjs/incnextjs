@@ -9,6 +9,8 @@ import BlogCarousel from '../components/Carousel/BlogCarousel';
 import InfiniteCarousel from '../components/Carousel/InfiniteCarousel';
 import SliderHome from '../components/Carousel/SliderHome';
 import Showcase from '../components/Showcase';
+import HomePageExternalVideo from '../components/Gallery/HomePageExternalVideo';
+import TabsHomePage from '../components/TabsHomePage';
 
 const GET_PAGE = gql`
   query getPage($slug: String!) {
@@ -24,6 +26,51 @@ const GET_PAGE = gql`
         }
       }
       content {
+        ... on TabContentRecord {
+          tab {
+            id
+            location
+            tabs {
+              id
+              tab {
+                id
+                title
+                featuredImage {
+                  responsiveImage {
+                    src
+                    srcSet
+                  }
+                }
+                content {
+                  ... on TextRecord {
+                    text
+                  }
+                }
+              }
+            }
+          }
+        }
+        ... on MediaReferenceRecord {
+          mediaLibrary {
+            id
+            name
+            category {
+              name
+            }
+            mediaItems {
+              ... on ExternalVideoRecord {
+                id
+                title
+                externalVideo {
+                  url
+                  thumbnailUrl
+                  width
+                  height
+                }
+              }
+            }
+          }
+        }
         ... on ShowcaseReferenceRecord {
           showcase {
             id
@@ -76,10 +123,10 @@ const Home = () => {
     }
   });
 
-  // useEffect(() => {
-  //   // console.log(router.query.slug)
-  //   console.log(data)
-  // }, [data])
+  useEffect(() => {
+    // console.log(router.query.slug)
+    console.log(data)
+  }, [data])
 
   useEffect(() => {
     document.body.classList = "";
@@ -136,6 +183,25 @@ const Home = () => {
                 </section>
               )
 
+            case 'MediaReferenceRecord':
+              switch (contentModule.mediaLibrary.category.name) {
+                case 'Speech':
+                  return (
+                    <section className="section">
+                      {/* <div className="container"> */}
+                      <HomePageExternalVideo data={contentModule.mediaLibrary} />
+                      {/* </div> */}
+                    </section>
+                  )
+                default: return null;
+              }
+
+            case 'TabContentRecord':
+              return (
+                <section className="section bg-light">
+                  <TabsHomePage data={contentModule.tab} />
+                </section>
+              )
             default:
               return null;
 
