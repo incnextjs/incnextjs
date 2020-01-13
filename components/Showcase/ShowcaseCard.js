@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Row, Col } from 'reactstrap';
 
-function Showcase({ data }) {
+function ShowcaseCard({ data }) {
     return (
         <Row>
             {data.items.map(item => (
@@ -10,7 +10,7 @@ function Showcase({ data }) {
                     <div className="course-feature bg-light p-3 py-5 rounded shadow">
                         <img src={item.icon && item.icon.url} height="50" alt="" />
                         <div className="mt-4">
-                            <h5><a className="text-primary">{item.title}</a></h5>
+                            <h5><Link href={item.url}><a className="text-primary">{item.title}</a></Link></h5>
                             <p className="text-muted mt-3 mb-0">{item.description}</p>
                         </div>
                     </div>
@@ -44,4 +44,4 @@ function Showcase({ data }) {
     )
 }
 
-export default Showcase;
+export default ShowcaseCard;

@@ -11,8 +11,8 @@ function BlogCarousel({ data }) {
         <div className="container">
             <Row className="justify-content-center">
                 <Col className="text-center">
-                    <div className="section-title mb-4 pb-2">
-                        <h4 className="title mb-4">{data.name}</h4>
+                    <div className="section-title pb-2">
+                        <h4 className="title">{data.name}</h4>
                         {/* <p className="text-muted para-desc mx-auto mb-0">Start working with <span className="text-primary font-weight-bold">Landrick</span> that can provide everything you need to generate awareness, drive traffic, connect.</p> */}
                     </div>
                 </Col>

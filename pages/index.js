@@ -8,9 +8,10 @@ import { Row, Col } from 'reactstrap';
 import BlogCarousel from '../components/Carousel/BlogCarousel';
 import InfiniteCarousel from '../components/Carousel/InfiniteCarousel';
 import SliderHome from '../components/Carousel/SliderHome';
-import Showcase from '../components/Showcase';
+import ShowcaseCard from '../components/Showcase/ShowcaseCard';
 import HomePageExternalVideo from '../components/Gallery/HomePageExternalVideo';
 import TabsHomePage from '../components/TabsHomePage';
+import ShowcaseButton from '../components/Showcase/ShowcaseButton';
 
 const GET_PAGE = gql`
   query getPage($slug: String!) {
@@ -74,6 +75,9 @@ const GET_PAGE = gql`
         ... on ShowcaseReferenceRecord {
           showcase {
             id
+            template {
+              name
+            }
             items {
               id
               title
@@ -160,13 +164,13 @@ const Home = () => {
               switch (contentModule.carousel.template.name) {
                 case 'Blog':
                   return (
-                    <section className="section bg-light">
+                    <section className="section-two bg-light">
                       <BlogCarousel data={contentModule.carousel} />
                     </section>
                   );
                 case 'Infinite':
                   return (
-                    <section className="section container">
+                    <section className="section-two container">
                       <InfiniteCarousel data={contentModule.carousel} />
                     </section>
                   )
@@ -177,19 +181,31 @@ const Home = () => {
               }
 
             case 'ShowcaseReferenceRecord':
-              return (
-                <section className="section">
-                  <div className="container">
-                    <Showcase data={contentModule.showcase} />
-                  </div>
-                </section>
-              )
+              switch (contentModule.showcase.template.name) {
+                case 'Card':
+                  return (
+                    <section className="section-two">
+                      <div className="container">
+                        <ShowcaseCard data={contentModule.showcase} />
+                      </div>
+                    </section>
+                  );
+                case 'Button':
+                  return (
+                    <section className="section-two">
+                      <div className="container">
+                        <ShowcaseButton data={contentModule.showcase}/>
+                      </div>
+                    </section>
+                  )
+                default: return null;
+              }
 
             case 'MediaReferenceRecord':
               switch (contentModule.mediaLibrary.category.name) {
                 case 'Speech':
                   return (
-                    <section className="section">
+                    <section className="section-two">
                       {/* <div className="container"> */}
                       <HomePageExternalVideo data={contentModule.mediaLibrary} />
                       {/* </div> */}
@@ -200,7 +216,7 @@ const Home = () => {
 
             case 'TabContentRecord':
               return (
-                <section className="section bg-light">
+                <section className="section-two bg-light">
                   <TabsHomePage data={contentModule.tab} />
                 </section>
               )

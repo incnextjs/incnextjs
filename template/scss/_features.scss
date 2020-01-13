@@ -40,10 +40,10 @@
 .key-feature {
     transition: all 0.2s ease;
     .icon {
-        height: 40px;
-        width: 40px;
-        line-height: 40px;
-        background: lighten($primary, 45%);
+        height: 50px;
+        width: 50px;
+        line-height: 50px;
+        background: $primary;
         font-size: 24px;
     }
     
@@ -54,6 +54,7 @@
 .key-feature .content, .features{
     .title {
         font-size: 18px;
+        color: $body-color;
     }
 }
 // Work process
