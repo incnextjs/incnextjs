@@ -7,7 +7,7 @@ import { Row, Col } from 'reactstrap';
 
 
 const GET_MENUS = gql`
-  query getTopbarMenu {
+  query getFooterData {
     menuLocation(filter:{name:{eq:"Footer"}}) {
         menuItems {
           menu {
@@ -20,10 +20,20 @@ const GET_MENUS = gql`
           }
         }
       }
+
+      widget(filter:{name:{eq:"Footer"}}) {
+        id
+        title
+        widgetContent {
+          ... on TextRecord {
+            text
+          }
+        }
+      }
   }
   `;
 
-function Footer() {
+function Footer({copyright}) {
 
     const {
         data
@@ -41,21 +51,26 @@ function Footer() {
                 <div className="container">
                     <Row>
                         <Col md={4}>
-                            <Link href="#"><a className="logo-footer" >Landrick<span className="text-primary">.</span></a></Link>
-                            <p className="mt-4">Start working with Landrick that can provide everything you need to generate awareness, drive traffic, connect.</p>
-                            <ul className="list-unstyled social-icon social mb-0 mt-4">
-                                <li className="list-inline-item"><Link href="#"><a className="rounded mr-1"><i className="mdi mdi-facebook" title="Facebook"></i></a></Link></li>
-                                <li className="list-inline-item"><Link href="#"><a className="rounded mr-1"><i className="mdi mdi-instagram" title="Instagram"></i></a></Link></li>
-                                <li className="list-inline-item"><Link href="#"><a className="rounded mr-1"><i className="mdi mdi-twitter" title="Twitter"></i></a></Link></li>
-                            </ul>
+                            {data && data.widget && (
+                                <React.Fragment>
+                                    <h4 className="text-light footer-head">{data.widget.title}</h4>
+                                    {data.widget.widgetContent.map(contentModule => {
+                                        switch (contentModule.__typename) {
+                                            case 'TextRecord':
+                                                return <div className="mt-4" style={{fontSize:14}} dangerouslySetInnerHTML={{ __html: contentModule.text }} />
+                                            default: return null;
+                                        }
+                                    })}
+                                </React.Fragment>
+                            )}
                         </Col>
 
                         <Col md={8}>
                             <Row>
                                 {data && data.menuLocation.menuItems.map(({ menu }) => (
-                                    <Col md={4} style={{marginBottom:20}}>
+                                    <Col md={4} style={{ marginBottom: 20 }}>
                                         <h4 className="text-light footer-head">{menu.name}</h4>
-                                        <ul className="list-unstyled footer-list" style={{fontSize:14}}>
+                                        <ul className="list-unstyled footer-list" style={{ fontSize: 14 }}>
                                             {menu.children.map(childrenMenu => (
                                                 <li><Link href={childrenMenu.pathname}><a className="text-foot"><i className="fas fa-angle-right mr-1"></i> {childrenMenu.name}</a></Link></li>
                                             ))}
@@ -74,7 +89,7 @@ function Footer() {
                     <div className="row align-items-center">
                         <div className="col-sm-6">
                             <div className="text-sm-left">
-                                <p className="mb-0">©  {new Date().getFullYear()}  Landrick. Develop by Themesbrand.</p>
+                                <p className="mb-0">{copyright}</p>
                             </div>
                         </div>
                     </div>

@@ -23,6 +23,7 @@ const GET_PAGE_SETTINGS = gql`
           srcSet
         }
       }
+      copyright
     }
   }
   `;
@@ -60,7 +61,7 @@ function Layout({ children }) {
       <React.Fragment>
         <Topbar logo={data && data.pageSetting.logo.responsiveImage || null} />
         {children}
-        <Footer />
+        <Footer copyright={data && data.pageSetting.copyright || ''}/>
         <div id="bottomIcon">
           <ScrollUpButton ContainerClassName="back-to-top rounded text-center" />
         </div>
