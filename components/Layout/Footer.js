@@ -21,6 +21,17 @@ const GET_MENUS = gql`
         }
       }
 
+      navFooter:menuLocation(filter:{name:{eq:"Navbar Footer"}}) {
+        id
+        menuItems {
+          menu {
+            id
+            name
+            pathname
+          }
+        }
+      }
+
       widget(filter:{name:{eq:"Footer"}}) {
         id
         title
@@ -102,6 +113,15 @@ function Footer({ copyright, socialLinks }) {
                             <div className="text-sm-left">
                                 <p className="mb-0">{copyright}</p>
                             </div>
+                        </div>
+                        <div className="col-sm-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                            <ul className="list-unstyled payment-cards text-sm-right mb-0">
+                                {data && data.navFooter.menuItems.map(({ menu }) => (
+                                    <li className="list-inline-item p-2" style={{
+                                        fontSize: 14,
+                                    }}><Link href={menu.pathname}><a style={{color:'#5a6d90'}}>{menu.name}</a></Link></li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>
