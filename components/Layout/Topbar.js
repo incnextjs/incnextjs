@@ -151,7 +151,7 @@ function Topbar({ logo }) {
 
                                         </li>
                                     }
-                                    return <li><Link href={menu.pathname || ''}><a>{menu.name}</a></Link></li>
+                                    return <li><a href={menu.pathname || ''}>{menu.name}</a></li>
                                 })}
                             </ul>
                         </div>
