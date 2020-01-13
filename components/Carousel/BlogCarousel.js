@@ -30,8 +30,8 @@ function BlogCarousel({ data }) {
                             <div className="content p-4">
                                 <h4>{item.title}</h4>
                                 <p>{item.subtitle}</p>
-                                <div className="post-meta mt-3">
-                                    <Link href={item.url}><a className="text-muted float-right readmore">Read More <i className="fas fa-angle-right"></i></a></Link>
+                                <div className="post-meta mt-3" style={{textAlign:'right'}}>
+                                    <Link href={item.url}><a className="text-muted readmore">Read More <i className="fas fa-angle-right"></i></a></Link>
                                 </div>
                             </div>
                         </div>

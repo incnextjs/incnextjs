@@ -12,6 +12,8 @@ import ShowcaseCard from '../components/Showcase/ShowcaseCard';
 import HomePageExternalVideo from '../components/Gallery/HomePageExternalVideo';
 import TabsHomePage from '../components/TabsHomePage';
 import ShowcaseButton from '../components/Showcase/ShowcaseButton';
+import FeaturedPosts from '../components/FeaturedPosts';
+import SingleFeaturedPost from '../components/SingleFeaturedPost';
 
 const GET_PAGE = gql`
   query getPage($slug: String!) {
@@ -27,6 +29,26 @@ const GET_PAGE = gql`
         }
       }
       content {
+        ... on FeaturedPostRecord {
+          title
+          posts {
+            id
+            title
+            slug
+            content {
+              ...on TextRecord {
+                text(markdown:true)
+              }
+            }
+            featuredImage {
+              responsiveImage {
+                src
+                srcSet
+              }
+            }
+            createdAt
+          }
+        }
         ... on TabContentRecord {
           tab {
             id
@@ -194,7 +216,7 @@ const Home = () => {
                   return (
                     <section className="section-two">
                       <div className="container">
-                        <ShowcaseButton data={contentModule.showcase}/>
+                        <ShowcaseButton data={contentModule.showcase} />
                       </div>
                     </section>
                   )
@@ -220,6 +242,25 @@ const Home = () => {
                   <TabsHomePage data={contentModule.tab} />
                 </section>
               )
+
+            case 'FeaturedPostRecord':
+              if (contentModule.posts.length > 1) {
+                return (
+                  <section className="section-two">
+                    <div className="container">
+                      <FeaturedPosts data={contentModule} />
+                    </div>
+                  </section>
+                )
+              } else {
+                return (
+                  <section className="section-two bg-light">
+                    <div className="container">
+                      <SingleFeaturedPost data={contentModule} />
+                    </div>
+                  </section>
+                )
+              }
             default:
               return null;
 
