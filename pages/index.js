@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { withApollo } from '../apollo/client';
 import gql from 'graphql-tag'
 import Link from 'next/link'
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks'
 import { Row, Col } from 'reactstrap';
@@ -153,10 +154,10 @@ const Home = () => {
     }
   });
 
-  useEffect(() => {
-    // console.log(router.query.slug)
-    console.log(data)
-  }, [data])
+  // useEffect(() => {
+  //   // console.log(router.query.slug)
+  //   console.log(data)
+  // }, [data])
 
   useEffect(() => {
     document.body.classList = "";
@@ -176,9 +177,13 @@ const Home = () => {
   }
 
   if (data) {
-    const { content } = data.page;
+    const { content,title } = data.page;
     return (
       <div className="default-page">
+
+        <Head>
+          <title>{title}</title>
+        </Head>
 
         {content.map(contentModule => {
           switch (contentModule.__typename) {

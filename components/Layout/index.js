@@ -66,9 +66,6 @@ function Layout({ children }) {
   //   const { pageSetting: settings } = data;
   return (
     <React.Fragment>
-      <Head>
-        <title>{data && data.pageSetting.title}</title>
-      </Head>
       <Topbar logo={data && data.pageSetting.logo.responsiveImage || null}/>
       {children}
       <Footer copyright={data && data.pageSetting.copyright || ''}
