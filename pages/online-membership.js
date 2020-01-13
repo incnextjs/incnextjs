@@ -3,10 +3,12 @@ import { useRouter } from 'next/router';
 import { withApollo } from '../apollo/client';
 import gql from 'graphql-tag'
 import Link from 'next/link'
+import Head from 'next/head';
 import { useQuery } from '@apollo/react-hooks'
 import { Row, Col, Alert, Spinner } from 'reactstrap';
 import { createMember } from '../settings/datocms-api';
 import IndiaStates from '../IndianStates.json';
+
 //Import Images
 import modern01 from '../template/images/modern01.jpg';
 import roundWhite from '../template/images/shapes/round-white.png';
@@ -121,9 +123,12 @@ function OnlineMembership() {
     }
 
     if (data) {
-        const { page: { content, featuredImage } } = data;
+        const { page: { content, title, featuredImage } } = data;
         return (
             <div className="default-page">
+                <Head>
+                    <title>{title}</title>
+                </Head>
 
                 {/* <div id="preloader">
                     <div id="status">
@@ -247,7 +252,7 @@ function OnlineMembership() {
                                                                 <label className="custom-control-label" htmlFor="customCheck1">
                                                                     I accept the membership <a href="https://www.inc.in/en/terms-conditions" className="text-primary">Terms And Conditions</a> &
                                                                    <a href="https://www.inc.in/en/inc-constitution" className="text-primary"> Constitution</a> as specified in the INC constitution.
-                                                                         I agree to be communicated to by the party via phone, SMS, email and other means.
+                                                                          I agree to be communicated to by the party via phone, SMS, email and other means.
                                                                     I am above 18 years of age and not a member of any other Political Party.</label>
                                                             </div>
                                                         </div>

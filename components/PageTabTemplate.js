@@ -106,7 +106,7 @@ class PageTabTemplate extends Component {
                         <Row>
                             <Col lg={4} md={5} className="col-12 mt-4 mt-sm-0 pt-2 pt-sm-0 page-nested-tabs">
                                 <div className="sidebar mt-sm-30 p-4 rounded shadow"
-                                    style={{ top: '15%', position: 'sticky' }}>
+                                    style={{ /*top: '15%', position: 'sticky'*/ }}>
 
                                     <ul className="list-unstyled page-tab-items">
                                         {tabs.map(tab => (
