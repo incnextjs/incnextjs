@@ -4,51 +4,6 @@ import Link from 'next/link';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-// Blog Images
-// import client1 from '../../template/images/client/1.png';
-// import client2 from '../../template/images/client/2.png';
-// import client3 from '../../template/images/client/3.png';
-// import client4 from '../../template/images/client/4.png';
-// import client5 from '../../template/images/client/5.png';
-// import client6 from '../../template/images/client/6.png';
-
-// const items = [
-//     {
-//       id: 1,
-//       image: client1,
-//       title: "Thomas Israel",
-//       description: "It seems that only fragments of the original text remain in the Lorem Ipsum texts used today.",
-//     },
-//     {
-//       id: 2,
-//       image: client2,
-//       title: "Carl Oliver",
-//       description: "The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century."
-//     }, {
-//       id: 3,
-//       image: client3,
-//       title: "Barbara McIntosh",
-//       description: "One disadvantage of Lorum Ipsum is that in Latin certain letters appear more frequently than others."
-//     },
-//     {
-//       id: 4,
-//       image: client4,
-//       title: "Jill Webb",
-//       description: "Thus, Lorem Ipsum has only limited suitability as a visual filler for German texts."
-//     }, {
-//       id: 5,
-//       image: client5,
-//       description: "There is now an abundance of readable dummy texts. These are usually used when a text is required..",
-//       title: "Dean Tolle"
-//     }, {
-//       id: 6,
-//       image: client6,
-//       title: "Christa Smith",
-//       description: "According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero..",
-//     }
-//   ];
-
-
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -97,7 +52,7 @@ function InfiniteCarousel({ data }) {
             {/* <h6 className="text-primary">{item.title}</h6> */}
           </div>
         ))}
-      </Carousel>;
+      </Carousel>
        </React.Fragment>
   )
 }

@@ -11,7 +11,7 @@ function ShowcaseCard({ data }) {
                         <img src={item.icon && item.icon.url} height="50" alt="" />
                         <div className="mt-4">
                             <h5><Link href={item.url}><a className="text-primary">{item.title}</a></Link></h5>
-                            <p className="text-muted mt-3 mb-0">{item.description}</p>
+                            {/* <p className="text-muted mt-3 mb-0">{item.description}</p> */}
                         </div>
                     </div>
                 </Col>

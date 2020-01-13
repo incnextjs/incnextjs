@@ -14,6 +14,7 @@ import TabsHomePage from '../components/TabsHomePage';
 import ShowcaseButton from '../components/Showcase/ShowcaseButton';
 import FeaturedPosts from '../components/FeaturedPosts';
 import SingleFeaturedPost from '../components/SingleFeaturedPost';
+import PortfolioCarousel from '../components/Carousel/PortfolioCarousel';
 
 const GET_PAGE = gql`
   query getPage($slug: String!) {
@@ -198,6 +199,14 @@ const Home = () => {
                   )
                 case 'Home':
                   return <SliderHome data={contentModule.carousel} />
+                case 'Portfolio':
+                  return (
+                    <section className="section-two bg-light">
+                      <div className="container">
+                      <PortfolioCarousel data={contentModule.carousel} />
+                      </div>
+                    </section>
+                  )
                 default:
                   return null;
               }
