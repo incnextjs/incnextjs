@@ -25,7 +25,7 @@ module.exports = withFonts(withCSS(withSass({
 
         return config;
     },
-    assetPrefix: process.env.NODE_ENV == 'production' ? 'https://agitated-goldstine-c49d11.netlify.com' : '',
+    exportTrailingSlash: true,
     exportPathMap: async (defaultPathMap) => {
 
         const client = new ApolloClient({
