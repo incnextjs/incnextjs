@@ -15,6 +15,9 @@ module.exports = withFonts(withCSS(withSass({
             use: {
                 loader: 'url-loader',
                 options: {
+                    // outputPath: '[path]',
+                    name: '[path][name].[ext]/[hash].[ext]',
+                    // publicPath: '/static/',
                     limit: 100000
                 }
             }
@@ -22,6 +25,7 @@ module.exports = withFonts(withCSS(withSass({
 
         return config;
     },
+    assetPrefix: process.env.NODE_ENV == 'production' ? 'https://agitated-goldstine-c49d11.netlify.com' : '',
     exportPathMap: async (defaultPathMap) => {
 
         const client = new ApolloClient({
@@ -58,7 +62,7 @@ module.exports = withFonts(withCSS(withSass({
         } catch (error) {
             console.log(err);
         }
-      
+
         return {
             ...dynamicPathMap,
             // '/index': { page: '/index', query: { slug: '/index' } },
