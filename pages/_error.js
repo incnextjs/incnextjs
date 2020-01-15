@@ -1,7 +1,12 @@
 import React from 'react';
+import Error from 'next/error';
 
-function Error() {
-    return (
-        <p>Error...</p>
-    )
+export default class ErrorPage extends Error {
+
+    render() {
+        return (
+            <p>Error...</p>
+        )
+    }
+    
 }
