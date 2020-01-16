@@ -46,7 +46,7 @@ function BlogCarousel({ data }) {
                 removeArrowOnDeviceType={['superLargeDesktop', 'desktop', 'tablet', 'mobile']}
             >
                 {data.items.map(item => (
-                    <Col className="mt-4 pt-2">
+                    <Col key={item.id} className="mt-4 pt-2">
                         <div className="blog position-relative overflow-hidden shadow rounded">
                             <div className="position-relative">
                                 <img src={item.image && item.image.responsiveImage.src || defaultImage}
@@ -58,7 +58,7 @@ function BlogCarousel({ data }) {
                                 <h4>{item.title}</h4>
                                 <p>{item.subtitle}</p>
                                 <div className="post-meta mt-3" style={{ textAlign: 'right' }}>
-                                    <Link href={item.url}><a className="text-muted readmore">Read More <i className="fas fa-angle-right"></i></a></Link>
+                                    <a href={item.url} className="text-muted readmore">Read More <i className="fas fa-angle-right"></i></a>
                                 </div>
                             </div>
                         </div>

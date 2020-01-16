@@ -32,6 +32,7 @@ const GET_PAGE = gql`
       }
       content {
         ... on FeaturedPostRecord {
+          id
           title
           posts {
             id
@@ -39,7 +40,8 @@ const GET_PAGE = gql`
             slug
             content {
               ...on TextRecord {
-                text(markdown:true)
+                id
+                text
               }
             }
             featuredImage {
@@ -52,6 +54,7 @@ const GET_PAGE = gql`
           }
         }
         ... on TabContentRecord {
+          id
           tab {
             id
             location
@@ -68,6 +71,7 @@ const GET_PAGE = gql`
                 }
                 content {
                   ... on TextRecord {
+                    id
                     text
                   }
                 }
@@ -76,6 +80,7 @@ const GET_PAGE = gql`
           }
         }
         ... on MediaReferenceRecord {
+          id
           mediaLibrary {
             id
             name
@@ -98,6 +103,7 @@ const GET_PAGE = gql`
           }
         }
         ... on ShowcaseReferenceRecord {
+          id
           showcase {
             id
             template {
@@ -119,6 +125,7 @@ const GET_PAGE = gql`
           }
         }
         ... on CarouselReferenceRecord {
+          id
           carousel {
             id
             name
@@ -126,6 +133,7 @@ const GET_PAGE = gql`
               name
             }
             items {
+              id
               title
               subtitle
               description
@@ -177,7 +185,7 @@ const Home = () => {
   }
 
   if (data) {
-    const { content,title } = data.page;
+    const { content, title } = data.page;
     return (
       <div className="default-page">
 
@@ -193,21 +201,21 @@ const Home = () => {
               switch (contentModule.carousel.template.name) {
                 case 'Blog':
                   return (
-                    <section className="section-two bg-light">
+                    <section key={contentModule.id} className="section-two bg-light">
                       <BlogCarousel data={contentModule.carousel} />
                     </section>
                   );
                 case 'Infinite':
                   return (
-                    <section className="section-two container">
+                    <section key={contentModule.id} className="section-two container">
                       <InfiniteCarousel data={contentModule.carousel} />
                     </section>
                   )
                 case 'Home':
-                  return <SliderHome data={contentModule.carousel} />
+                  return <SliderHome key={contentModule.id} data={contentModule.carousel} />
                 case 'Portfolio':
                   return (
-                    <section className="section-two bg-light">
+                    <section key={contentModule.id} className="section-two bg-light">
                       <div className="container">
                         <PortfolioCarousel data={contentModule.carousel} />
                       </div>
@@ -221,7 +229,7 @@ const Home = () => {
               switch (contentModule.showcase.template.name) {
                 case 'Card':
                   return (
-                    <section className="section-two">
+                    <section key={contentModule.id} className="section-two">
                       <div className="container">
                         <ShowcaseCard data={contentModule.showcase} />
                       </div>
@@ -229,7 +237,7 @@ const Home = () => {
                   );
                 case 'Button':
                   return (
-                    <section className="section-two">
+                    <section key={contentModule.id} className="section-two">
                       <div className="container">
                         <ShowcaseButton data={contentModule.showcase} />
                       </div>
@@ -242,7 +250,7 @@ const Home = () => {
               switch (contentModule.mediaLibrary.category.name) {
                 case 'Speech':
                   return (
-                    <section className="section-three">
+                    <section key={contentModule.id} className="section-three">
                       <div className="container">
                         <HomePageExternalVideo data={contentModule.mediaLibrary} />
                       </div>
@@ -253,7 +261,7 @@ const Home = () => {
 
             case 'TabContentRecord':
               return (
-                <section className="section-two bg-light">
+                <section key={contentModule.id} className="section-two bg-light">
                   <TabsHomePage data={contentModule.tab} />
                 </section>
               )
@@ -261,7 +269,7 @@ const Home = () => {
             case 'FeaturedPostRecord':
               if (contentModule.posts.length > 1) {
                 return (
-                  <section className="section-two">
+                  <section key={contentModule.id} className="section-two">
                     <div className="container">
                       <FeaturedPosts data={contentModule} />
                     </div>
@@ -269,7 +277,7 @@ const Home = () => {
                 )
               } else {
                 return (
-                  <section className="section-two bg-light">
+                  <section key={contentModule.id} className="section-two bg-light">
                     <div className="container">
                       <SingleFeaturedPost data={contentModule} />
                     </div>

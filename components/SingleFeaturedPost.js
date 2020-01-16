@@ -21,7 +21,7 @@ function SingleFeaturedPost({ data }) {
                 </Col>
             </Row>
             {data.posts.map(post => (
-                <Row className="align-items-center">
+                <Row key={post.id} className="align-items-center">
                     <Col lg={7} md={7} className="mt-4 pt-2 mt-sm-0 pt-sm-0">
                         <div className="position-relative">
                             <img src={post.featuredImage && post.featuredImage.responsiveImage.src || null}
@@ -33,7 +33,7 @@ function SingleFeaturedPost({ data }) {
                         <div className="section-title ml-lg-4">
                             <h4 className="title mb-4">{post.title}</h4>
                             <div className="text-muted" dangerouslySetInnerHTML={{__html: getPostDescription(post)}}/>
-                            <Link href={post.slug}><a className="btn btn-primary mt-3"> View All</a></Link>
+                            <a href={post.slug} className="btn btn-primary mt-3"> View All</a>
                         </div>
                     </Col>
                 </Row>

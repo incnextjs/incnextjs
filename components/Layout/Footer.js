@@ -14,6 +14,7 @@ const GET_MENUS = gql`
               id
             name
             children {
+                id
               name
               pathname
             }
@@ -37,6 +38,7 @@ const GET_MENUS = gql`
         title
         widgetContent {
           ... on TextRecord {
+              id
             text
           }
         }
@@ -66,7 +68,7 @@ function Footer({ copyright, socialLinks }) {
                                     {data.widget.widgetContent.map(contentModule => {
                                         switch (contentModule.__typename) {
                                             case 'TextRecord':
-                                                return <div className="mt-4" style={{ fontSize: 14 }} dangerouslySetInnerHTML={{ __html: contentModule.text }} />
+                                                return <div key={contentModule.id} className="mt-4" style={{ fontSize: 14 }} dangerouslySetInnerHTML={{ __html: contentModule.text }} />
                                             default: return null;
                                         }
                                     })}
@@ -79,7 +81,7 @@ function Footer({ copyright, socialLinks }) {
                                 margin: 0
                             }}>
                                 {socialLinks && socialLinks.map(socialLink => (
-                                    <li className="list-inline-item" style={{
+                                    <li key={socialLink.id} className="list-inline-item" style={{
                                         padding: 5,
                                         fontSize: 22,
                                     }}><a href={socialLink.url}><i style={{ color: '#5a6d90' }} className={`${socialLink.iconCode} `}></i></a></li>
@@ -90,11 +92,11 @@ function Footer({ copyright, socialLinks }) {
                         <Col md={8}>
                             <Row>
                                 {data && data.menuLocation.menuItems.map(({ menu }) => (
-                                    <Col md={4} style={{ marginBottom: 20 }}>
+                                    <Col key={menu.id} md={4} style={{ marginBottom: 20 }}>
                                         <h4 className="text-light footer-head">{menu.name}</h4>
                                         <ul className="list-unstyled footer-list" style={{ fontSize: 14 }}>
                                             {menu.children.map(childrenMenu => (
-                                                <li><Link href={childrenMenu.pathname}><a className="text-foot"><i className="fas fa-angle-right mr-1"></i> {childrenMenu.name}</a></Link></li>
+                                                <li key={childrenMenu.id}><a href={childrenMenu.pathname} className="text-foot"><i className="fas fa-angle-right mr-1"></i> {childrenMenu.name}</a></li>
                                             ))}
                                         </ul>
                                     </Col>
@@ -117,9 +119,9 @@ function Footer({ copyright, socialLinks }) {
                         <div className="col-sm-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
                             <ul className="list-unstyled payment-cards text-sm-right mb-0">
                                 {data && data.navFooter.menuItems.map(({ menu }) => (
-                                    <li className="list-inline-item p-2" style={{
+                                    <li key={menu.id} className="list-inline-item p-2" style={{
                                         fontSize: 14,
-                                    }}><Link href={menu.pathname}><a style={{color:'#5a6d90'}}>{menu.name}</a></Link></li>
+                                    }}><a href={menu.pathname} style={{ color: '#5a6d90' }}>{menu.name}</a></li>
                                 ))}
                             </ul>
                         </div>

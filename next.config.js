@@ -10,13 +10,13 @@ const gql = require('graphql-tag');
 
 module.exports = withFonts(withCSS(withSass({
     webpack(config, options) {
+
         config.module.rules.push({
             test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
             use: {
                 loader: 'url-loader',
                 options: {
                     // outputPath: '[path]',
-                    name: '[path][name].[ext]/[hash].[ext]',
                     // publicPath: '/static/',
                     limit: 100000
                 }
@@ -25,7 +25,6 @@ module.exports = withFonts(withCSS(withSass({
 
         return config;
     },
-    exportTrailingSlash: true,
     exportPathMap: async (defaultPathMap) => {
 
         const client = new ApolloClient({

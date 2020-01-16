@@ -39,8 +39,8 @@ function SliderHome({ data }) {
                     removeArrowOnDeviceType={['superLargeDesktop','desktop','tablet','mobile']}
                 >
                     {data.items.map(item => (
-                        <div className="item">
-                            <li className="bg-slider"
+                        <div key={item.id} className="item">
+                            <div className="bg-slider"
                                 style={{
                                     background: `url(${item.image && item.image.responsiveImage.src || null})`,
                                     backgroundPosition: "center center",
@@ -56,7 +56,7 @@ function SliderHome({ data }) {
                                                         <h3 className="bold">{item.subtitle}</h3>
                                                         <p className="para-desc mx-auto text-light">{item.description}</p>
                                                         <div className="mt-4">
-                                                            <Link href={item.url}><a className="btn btn-primary mt-2 mr-2 mouse-down"> Read More</a></Link>
+                                                            <a href={item.url} className="btn btn-primary mt-2 mr-2 mouse-down"> Read More</a>
                                                         </div>
                                                     </div>
                                                 </Col>
@@ -64,7 +64,7 @@ function SliderHome({ data }) {
                                         </div>
                                     </div>
                                 </div>
-                            </li>
+                            </div>
                         </div>
                     ))}
 

@@ -23,15 +23,19 @@ const GET_PAGE = gql`
       }
       content {
         ... on HeadingRecord {
+          id
           text
         }
         ... on TextRecord {
+          id
           text
         }
         ... on QuoteRecord {
+          id
           text
         }
         ... on TabContentRecord {
+          id
           tab {
             id
             tabs {
@@ -44,12 +48,15 @@ const GET_PAGE = gql`
                   title
                   content {
                       ... on HeadingRecord {
+                        id
                         text
                       }
                       ... on TextRecord {
+                        id
                         text
                       }
                       ... on QuoteRecord {
+                        id
                         text
                       }
                   }

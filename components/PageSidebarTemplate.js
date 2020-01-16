@@ -71,9 +71,9 @@ class PageSidebarTemplate extends Component {
                                             {content.map(contentModule => {
                                                 switch (contentModule.__typename) {
                                                     case 'HeadingRecord':
-                                                        return <h5 className="heading-record">{contentModule.text}</h5>
+                                                        return <h5 key={contentModule.id} className="heading-record">{contentModule.text}</h5>
                                                     case 'TextRecord':
-                                                        return <div className="text-record" dangerouslySetInnerHTML={{ __html: contentModule.text }} />
+                                                        return <div key={contentModule.id} className="text-record" dangerouslySetInnerHTML={{ __html: contentModule.text }} />
                                                 }
                                             })}
                                         </div>

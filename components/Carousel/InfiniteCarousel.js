@@ -40,20 +40,20 @@ function InfiniteCarousel({ data }) {
         responsive={responsive}
         infinite={true}
         ssr={false}
-        removeArrowOnDeviceType={['superLargeDesktop','desktop','tablet','mobile']}
+        removeArrowOnDeviceType={['superLargeDesktop', 'desktop', 'tablet', 'mobile']}
       >
         {data.items.map(item => (
-          <div className="customer-testi mr-2 ml-2 text-center p-4 rounded border"
+          <div key={item.id} className="customer-testi mr-2 ml-2 text-center p-4 rounded border"
             style={{ height: 300, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
             {/* <img src={item.image} className="mx-auto" alt="" /> */}
             <span className="badge badge-primary">{item.title}</span>
             <p className="text-muted mt-4">{item.subtitle}</p>
-            <Link href={item.url}><a className="btn btn-light">Read Now</a></Link>
+            <a href={item.url} className="btn btn-light">Read Now</a>
             {/* <h6 className="text-primary">{item.title}</h6> */}
           </div>
         ))}
       </Carousel>
-       </React.Fragment>
+    </React.Fragment>
   )
 }
 export default InfiniteCarousel;

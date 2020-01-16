@@ -28,6 +28,7 @@ const GET_PAGE = gql`
       }
       content {
         ... on TextRecord {
+            id
           text
         }
       }
@@ -234,8 +235,8 @@ function OnlineMembership() {
                                                             <select className="form-control pl-5" required
                                                                 name="state" value={formData.state} onChange={handleOnChange}>
                                                                 <option></option>
-                                                                {Object.keys(IndiaStates).map(state => (
-                                                                    <option value={state}>{IndiaStates[state]}</option>
+                                                                {Object.keys(IndiaStates).map((state,index) => (
+                                                                    <option key={state} value={state}>{IndiaStates[state]}</option>
                                                                 ))}
                                                             </select>
                                                         </div>
@@ -280,27 +281,12 @@ function OnlineMembership() {
                                             {content.map(contentModule => {
                                                 switch (contentModule.__typename) {
                                                     case "TextRecord":
-                                                        return <div className="text-light" style={{ textShadow: '0.5px 0.5px black' }}
+                                                        return <div key={contentModule.id} className="text-light" style={{ textShadow: '0.5px 0.5px black' }}
                                                             dangerouslySetInnerHTML={{ __html: data.page.content[0].text }} />
                                                     default:
                                                         return null;
                                                 }
                                             })}
-
-                                            {/* <h1 className="heading text-white mb-3">BECOME A CONGRESSMAN </h1>
-                                        <p className="para-desc text-light" style={{ fontSize: 16 }}>"The Indian National Congress has always represented a secular, democratic, just and inclusive India-</p>
-                                        <ul>
-                                            <li className="para-desc text-light" style={{ fontSize: 16 }}>An India that is empowering the disadvantaged and the discriminated;</li>
-                                            <li className="para-desc text-light" style={{ fontSize: 16 }}>An India that is blending tradition with modernity;</li>
-                                            <li className="para-desc text-light" style={{ fontSize: 16 }}>An India that is anchored in unity amidst its many diversities."</li>
-                                        </ul>
-                                        <p className="para-desc text-light" style={{ fontSize: 16 }}>If your vision for the nation is the same as ours, become a member of the Indian National Congress and together we will build a better India.</p>
-                                        <p className="para-desc text-light" style={{ fontSize: 16 }}>Before you get started, keep your Voter ID handy.</p> */}
-                                            <div className="watch-video mt-4 pt-2">
-                                                {/* <Link href="#"><a className="btn btn-primary mb-2 mr-2">Get Started</a></Link> */}
-                                                {/* <Link href="#" onClick={openModal} className="video-play-icon watch text-light ml-1 mb-2"><i className="mdi mdi-play play-icon-circle text-center d-inline-block mr-2 rounded-pill text-white position-relative play play-iconbar"></i> WATCH VIDEO</Link> */}
-                                                {/* <ModalVideo channel='youtube' isOpen={state.isOpen} videoId='L61p2uyiMSo' onClose={() => setState({ ...state, isOpen: false })} /> */}
-                                            </div>
                                         </div>
                                     </Col>
                                 </Row>

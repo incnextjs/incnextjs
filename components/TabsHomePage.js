@@ -33,7 +33,7 @@ function TabsHomePage({ data }) {
                             <Row>
                                 <ul className="col container-filter list-unstyled categories-filter text-center" id="filter">
                                     {data.tabs.map(({ tab }) => (
-                                        <li className="list-inline-item" onClick={e => toggle(tab.id)}>
+                                        <li key={tab.id} className="list-inline-item" onClick={e => toggle(tab.id)}>
                                             <a className={`categories border d-block text-dark rounded ${activeTab == tab.id && 'active'}`}>
                                                 {tab.title}
                                             </a></li>
@@ -50,7 +50,7 @@ function TabsHomePage({ data }) {
 
                         <TabContent activeTab={activeTab}>
                             {data.tabs.map(({ tab }) => (
-                                <TabPane tabId={tab.id}>
+                                <TabPane key={tab.id} tabId={tab.id}>
                                     <Row className="align-items-center">
                                         <Col md={6}>
                                             <img src={tab.featuredImage && tab.featuredImage.responsiveImage.src || null}
@@ -64,7 +64,7 @@ function TabsHomePage({ data }) {
                                                     switch (contentModule.__typename) {
                                                         case 'TextRecord':
                                                             return (
-                                                                <div className="text-muted" dangerouslySetInnerHTML={{ __html: contentModule.text }} />
+                                                                <div key={contentModule.id} className="text-muted" dangerouslySetInnerHTML={{ __html: contentModule.text }} />
                                                             )
                                                         default: return null;
                                                     }
@@ -74,13 +74,6 @@ function TabsHomePage({ data }) {
                                     </Row>
                                 </TabPane>
                             ))}
-                            <TabPane tabId="1">
-                                <Row className="align-items-center">
-
-
-
-                                </Row>
-                            </TabPane>
                         </TabContent>
                     </Col>
                 </Row>

@@ -89,7 +89,7 @@ function HomePageExternalVideo({ data }) {
                     >
                         {data.mediaItems.map((media, index) => {
                             return (
-                                <Col className="spacing designing" style={{cursor:'e-resize'}}>
+                                <Col key={media.id} className="spacing designing" style={{cursor:'e-resize'}}>
                                     <div className="work-container position-relative d-block overflow-hidden rounded mt-3">
                                         <a className="mfp-image d-inline-block" target="_blank"
                                             onClick={e => { toggle(media) }}>

@@ -29,7 +29,7 @@ const GET_MENUS = gql`
   }
   `;
 
-function Topbar({ logo, socialLinks }) {
+function Topbar({ logo, socialas }) {
 
     const [state, setState] = useState({
         isOpen: false,
@@ -108,7 +108,7 @@ function Topbar({ logo, socialLinks }) {
                                         style={{ height: '100%', width: '100%' }} />
                                 </div>
                             ) || (
-                                    <Link href="/index"><a className="logo">Landrick<span className="text-primary">.</span></a></Link>
+                                    <a href="/index"className="logo">Landrick<span className="text-primary">.</span></a>
                                 )}
                         </Col>
                         <Col lg={8} md={8} sm={6} xs={4}>
@@ -129,32 +129,30 @@ function Topbar({ logo, socialLinks }) {
                                 {data && data.menuLocation.menuItems.map(({ menu }) => {
 
                                     if (menu.children.length > 0) {
-                                        return <li className="has-submenu">
-                                            <Link href={menu.pathname || ''}>
-                                                <a onClick={(event) => { event.preventDefault(); setState({ ...state, [menu.id]: !state[menu.id] }) }}>{menu.name}</a>
-                                            </Link><span className="menu-arrow"></span>
+                                        return <li key={menu.id} className="has-submenu">
+                                            <a href={menu.pathname || ''} onClick={(event) => { event.preventDefault(); setState({ ...state, [menu.id]: !state[menu.id] }) }}>{menu.name}</a>
+                                            <span className="menu-arrow"></span>
 
                                             <ul className={state[menu.id] ? "submenu open" : "submenu"}>
                                                 {menu.children.map(childrenMenu => {
 
                                                     if (childrenMenu.children.length > 0) {
                                                         return (
-                                                            <li className="has-submenu">
-                                                                <Link href={childrenMenu.pathname || ''}>
-                                                                    <a onClick={(event) => {
-                                                                        event.preventDefault();
-                                                                        setState({ ...state, [childrenMenu.id]: !state[childrenMenu.id] })
-                                                                    }}>{childrenMenu.name}</a></Link><span className="submenu-arrow"></span>
-                                                                    
+                                                            <li key={childrenMenu.id} className="has-submenu">
+                                                                <a href={childrenMenu.pathname || ''} onClick={(event) => {
+                                                                    event.preventDefault();
+                                                                    setState({ ...state, [childrenMenu.id]: !state[childrenMenu.id] })
+                                                                }}>{childrenMenu.name}</a><span className="submenu-arrow"></span>
+
                                                                 <ul className={state[childrenMenu.id] ? "submenu open" : "submenu"}>
                                                                     {childrenMenu.children.map(subChildrenMenu => {
-                                                                        return <li><Link href={subChildrenMenu.pathname || ''}><a>{subChildrenMenu.name}</a></Link></li>
+                                                                        return <li key={subChildrenMenu.id}><a href={subChildrenMenu.pathname || ''} >{subChildrenMenu.name}</a></li>
                                                                     })}
                                                                 </ul>
                                                             </li>
                                                         )
                                                     } else {
-                                                        return <li><Link href={childrenMenu.pathname || ''}><a>{childrenMenu.name}</a></Link></li>
+                                                        return <li key={childrenMenu.id}><a href={childrenMenu.pathname || ''} >{childrenMenu.name}</a></li>
                                                     }
 
                                                 })}
@@ -162,7 +160,7 @@ function Topbar({ logo, socialLinks }) {
 
                                         </li>
                                     }
-                                    return <li><a href={menu.pathname || ''}>{menu.name}</a></li>
+                                    return <li key={menu.id}><a href={menu.pathname || ''}>{menu.name}</a></li>
                                 })}
                             </ul>
                         </div>

@@ -43,7 +43,7 @@ function PortfolioCarousel({ data }) {
                 removeArrowOnDeviceType={['superLargeDesktop', 'desktop', 'tablet', 'mobile']}
             >
                 {data.items.map(item => (
-                    <Col lg={12} className="spacing designing" style={{cursor:'e-resize'}}>
+                    <Col key={item.id} lg={12} className="spacing designing" style={{cursor:'e-resize'}}>
                         <div className="work-container position-relative d-block overflow-hidden rounded mt-3">
                             <div className="mfp-image d-inline-block" target="_blank">
                                 <img src={item.image && item.image.responsiveImage.src || defaultImage}

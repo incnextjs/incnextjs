@@ -110,12 +110,12 @@ class PageTabTemplate extends Component {
 
                                     <ul className="list-unstyled page-tab-items">
                                         {tabs.map(tab => (
-                                            <li className={`widget mb-4 page-tab-item ${tab.id == currentTab.key ? 'active' : ''}`}>
+                                            <li key={tab.id} className={`widget mb-4 page-tab-item ${tab.id == currentTab.key ? 'active' : ''}`}>
                                                 <i className="fas fa-angle-right page-tab-item-icon"></i>
                                                 <a onClick={e => { this.selectTab(tab.id) }}>{tab.title}</a>
                                                 <ul className={`list-unstyled page-tab-nested-items ${tab.id == currentTab.key ? "active" : ""}`}>
                                                     {tab.children.map(childTab => (
-                                                        <li className={`nested-tab-item ${currentTab.currentChild == childTab.id ? 'active' : ''}`}
+                                                        <li key={childTab.id} className={`nested-tab-item ${currentTab.currentChild == childTab.id ? 'active' : ''}`}
                                                             onClick={e => { this.selectChildTab(childTab.id) }}>
                                                             <i className="fas fa-angle-double-right page-tab-item-icon"></i>
                                                             <a>{childTab.title}</a>
@@ -152,17 +152,17 @@ class PageTabTemplate extends Component {
                                         </div>
                                         <div className="content p-4 page-content">
                                             {tabs.map(tab => (
-                                                <div style={tab.id != currentTab.key ? { display: 'none' } : {}} >
+                                                <div key={tab.id} style={tab.id != currentTab.key ? { display: 'none' } : {}} >
                                                     {tab.children.map(childTab => (
-                                                        <div style={childTab.id != currentTab.currentChild ? { display: 'none' } : {}}>
+                                                        <div key={childTab.id} style={childTab.id != currentTab.currentChild ? { display: 'none' } : {}}>
                                                             {childTab.content.map(contentModule => {
                                                                 switch (contentModule.__typename) {
                                                                     case 'HeadingRecord':
-                                                                        return <h5 className="heading-record">{contentModule.text}</h5>
+                                                                        return <h5 key={contentModule.id} className="heading-record">{contentModule.text}</h5>
                                                                     case 'TextRecord':
-                                                                        return <div className="text-record" dangerouslySetInnerHTML={{ __html: contentModule.text }} />
+                                                                        return <div key={contentModule.id} className="text-record" dangerouslySetInnerHTML={{ __html: contentModule.text }} />
                                                                     case 'QuoteRecord':
-                                                                        return <blockquote className="blockquote mt-3 p-3">
+                                                                        return <blockquote key={contentModule.id} className="blockquote mt-3 p-3">
                                                                             <p className="text-muted mb-0 font-italic">{contentModule.text}</p>
                                                                         </blockquote>
                                                                     default: return null;
