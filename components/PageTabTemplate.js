@@ -102,22 +102,21 @@ class PageTabTemplate extends Component {
                                 <a className={`rounded ${tab.id == currentTab.key ? 'active' : ''}`} onClick={e => { this.selectTab(tab.id) }}>{tab.title}</a>
                             ))}
                         </div> */}
-
                         <Row>
-                            <Col lg={4} md={5} className="col-12 mt-4 mt-sm-0 pt-2 pt-sm-0 page-nested-tabs">
+                            <Col lg={4} md={5} className="col-12 mt-4 mt-sm-0 mb-4 pt-2 pt-sm-0 page-nested-tabs">
                                 <div className="sidebar mt-sm-30 p-4 rounded shadow"
                                     style={{ /*top: '15%', position: 'sticky'*/ }}>
 
                                     <ul className="list-unstyled page-tab-items">
                                         {tabs.map(tab => (
-                                            <li key={tab.id} className={`widget mb-4 page-tab-item ${tab.id == currentTab.key ? 'active' : ''}`}>
+                                            <li key={tab.id} className={`widget mb-4 page-tab-item p-3 rounded ${tab.id == currentTab.key ? 'tab-active' : ''}`}>
                                                 <i className="fas fa-angle-right page-tab-item-icon"></i>
                                                 <a onClick={e => { this.selectTab(tab.id) }}>{tab.title}</a>
                                                 <ul className={`list-unstyled page-tab-nested-items ${tab.id == currentTab.key ? "active" : ""}`}>
                                                     {tab.children.map(childTab => (
-                                                        <li key={childTab.id} className={`nested-tab-item ${currentTab.currentChild == childTab.id ? 'active' : ''}`}
+                                                        <li key={childTab.id} className={`nested-tab-item mb-2 ${currentTab.currentChild == childTab.id ? 'tab-active' : ''}`}
                                                             onClick={e => { this.selectChildTab(childTab.id) }}>
-                                                            <i className="fas fa-angle-double-right page-tab-item-icon"></i>
+                                                            <i className="fas fa-angle-right page-tab-item-icon"></i>
                                                             <a>{childTab.title}</a>
                                                         </li>
                                                     ))}
