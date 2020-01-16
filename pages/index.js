@@ -237,7 +237,7 @@ const Home = () => {
                   );
                 case 'Button':
                   return (
-                    <section key={contentModule.id} className="section-no-padding-top">
+                    <section key={contentModule.id} className="section-three np-top">
                       <div className="container">
                         <ShowcaseButton data={contentModule.showcase} />
                       </div>

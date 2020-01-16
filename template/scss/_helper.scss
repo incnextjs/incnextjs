@@ -7,11 +7,7 @@
     position: relative;
 }
 
-.section-no-padding-top {
-    padding-bottom: 40px;
-    padding-top: 0px;
-    position: relative;
-}
+
 
 .section {
     padding: 100px 0;
@@ -24,6 +20,9 @@
 .section-three {
     padding: 30px 0;
     position: relative;
+}
+.np-top {
+    padding-top: 0;
 }
 .bg-overlay {
     background-color: $overlay;
