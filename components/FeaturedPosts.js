@@ -15,7 +15,7 @@ function FeaturedPosts({ data }) {
         <div>
             <Row className="justify-content-center">
                 <Col className="text-center">
-                    <div className="section-title mb-60">
+                    <div className="section-title">
                         <h4 className="title mb-4">{data.title}</h4>
                     </div>
                 </Col>

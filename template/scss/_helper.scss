@@ -7,6 +7,12 @@
     position: relative;
 }
 
+.section-no-padding-top {
+    padding-bottom: 40px;
+    padding-top: 0px;
+    position: relative;
+}
+
 .section {
     padding: 100px 0;
     position: relative;
@@ -16,7 +22,7 @@
     position: relative;
 }
 .section-three {
-    padding: 40px 0;
+    padding: 30px 0;
     position: relative;
 }
 .bg-overlay {

@@ -201,13 +201,13 @@ const Home = () => {
               switch (contentModule.carousel.template.name) {
                 case 'Blog':
                   return (
-                    <section key={contentModule.id} className="section-two bg-light">
+                    <section key={contentModule.id} className="section-three bg-light">
                       <BlogCarousel data={contentModule.carousel} />
                     </section>
                   );
                 case 'Infinite':
                   return (
-                    <section key={contentModule.id} className="section-two container">
+                    <section key={contentModule.id} className="section-three container">
                       <InfiniteCarousel data={contentModule.carousel} />
                     </section>
                   )
@@ -215,7 +215,7 @@ const Home = () => {
                   return <SliderHome key={contentModule.id} data={contentModule.carousel} />
                 case 'Portfolio':
                   return (
-                    <section key={contentModule.id} className="section-two bg-light">
+                    <section key={contentModule.id} className="section-three bg-light">
                       <div className="container">
                         <PortfolioCarousel data={contentModule.carousel} />
                       </div>
@@ -229,7 +229,7 @@ const Home = () => {
               switch (contentModule.showcase.template.name) {
                 case 'Card':
                   return (
-                    <section key={contentModule.id} className="section-two">
+                    <section key={contentModule.id} className="section-three">
                       <div className="container">
                         <ShowcaseCard data={contentModule.showcase} />
                       </div>
@@ -237,7 +237,7 @@ const Home = () => {
                   );
                 case 'Button':
                   return (
-                    <section key={contentModule.id} className="section-two">
+                    <section key={contentModule.id} className="section-no-padding-top">
                       <div className="container">
                         <ShowcaseButton data={contentModule.showcase} />
                       </div>
@@ -261,7 +261,7 @@ const Home = () => {
 
             case 'TabContentRecord':
               return (
-                <section key={contentModule.id} className="section-two bg-light">
+                <section key={contentModule.id} className="section-three bg-light">
                   <TabsHomePage data={contentModule.tab} />
                 </section>
               )
@@ -269,7 +269,7 @@ const Home = () => {
             case 'FeaturedPostRecord':
               if (contentModule.posts.length > 1) {
                 return (
-                  <section key={contentModule.id} className="section-two">
+                  <section key={contentModule.id} className="section-three">
                     <div className="container">
                       <FeaturedPosts data={contentModule} />
                     </div>
@@ -277,7 +277,7 @@ const Home = () => {
                 )
               } else {
                 return (
-                  <section key={contentModule.id} className="section-two bg-light">
+                  <section key={contentModule.id} className="section-three bg-light">
                     <div className="container">
                       <SingleFeaturedPost data={contentModule} />
                     </div>

@@ -31,8 +31,8 @@ function PortfolioCarousel({ data }) {
         <React.Fragment>
             <Row className="justify-content-center">
                 <Col className="text-center">
-                    <div className="section-title pb-2">
-                        <h4 className="title">{data.name}</h4>
+                    <div className="section-title">
+                        <h4 className="title mb-4">{data.name}</h4>
                     </div>
                 </Col>
             </Row>
