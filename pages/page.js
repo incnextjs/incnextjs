@@ -17,6 +17,7 @@ const GET_PAGE = gql`
       }
       featuredImage {
         responsiveImage {
+          base64
           src
           srcSet
         }

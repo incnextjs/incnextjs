@@ -104,11 +104,13 @@ function Topbar({ logo, socialas }) {
                         }}>
                             {logo && (
                                 <div>
-                                    <img src={logo.src} srcSet={logo.srcSet}
-                                        style={{ height: '100%', width: '100%' }} />
+                                    <a href="/index">
+                                        <img src={logo.src} srcSet={logo.srcSet}
+                                            style={{ height: '100%', width: '100%' }} />
+                                    </a>
                                 </div>
                             ) || (
-                                    <a href="/index"className="logo">Landrick<span className="text-primary">.</span></a>
+                                    <a href="/index" className="logo">Landrick<span className="text-primary">.</span></a>
                                 )}
                         </Col>
                         <Col lg={8} md={8} sm={6} xs={4}>

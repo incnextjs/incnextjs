@@ -7,24 +7,30 @@ const { InMemoryCache } = require('apollo-cache-inmemory');
 const { HttpLink } = require('apollo-link-http');
 const fetch = require('isomorphic-unfetch');
 const gql = require('graphql-tag');
+const nextBuildId = require('next-build-id');
+const withOptimizedImages = require('next-optimized-images');
 
-module.exports = withFonts(withCSS(withSass({
-    webpack(config, options) {
+module.exports = withFonts(withCSS(withSass(withOptimizedImages({
+    imagesFolder: 'images',
+    imagesName: '[name]-[hash].[ext]',
+    handleImages: ['jpg', 'jpeg', 'png', 'svg', 'webp', 'gif'],
+    optimizeImages: true,
+    optimizeImagesInDev: true,
+    // webpack(config, options) {
+    //     config.module.rules.push({
+    //         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+    //         use: {
+    //             loader: 'file-loader',
+    //             options: {
+    //                 publicPath: `/_next/static/images`,
+    //                 outputPath: 'static/images',
+    //                 name: '[name]-[hash].[ext]',
+    //             }
+    //         }
+    //     });
 
-        config.module.rules.push({
-            test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-            use: {
-                loader: 'url-loader',
-                options: {
-                    // outputPath: '[path]',
-                    // publicPath: '/static/',
-                    limit: 100000
-                }
-            }
-        });
-
-        return config;
-    },
+    //     return config;
+    // },
     exportPathMap: async (defaultPathMap) => {
 
         const client = new ApolloClient({
@@ -67,5 +73,6 @@ module.exports = withFonts(withCSS(withSass({
             // '/index': { page: '/index', query: { slug: '/index' } },
             // '/index': { page: '/index' },
         }
-    }
-})));
+    },
+    generateBuildId: () => nextBuildId({ dir: __dirname, describe: true })
+}))));
